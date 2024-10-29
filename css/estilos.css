@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Arima:wght@100..700&display=swap');
+
+:root{
+    --padding-container: 180px 0;
+    --color-title: #fff;
+}
+
+body{
+    font-family: "Arima", sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: var(--padding-container);
+    background-color: transparent; /* Esto evitará que el color de fondo de container sobreescriba el del body */
+}
+
+.nav_title{
+    position: absolute;
+    top: 3%;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    max-height: 1000px;
+    position: relative;
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    background-color: transparent; /* Hacer transparente para que el fondo verde del body se vea */
+    color: #fff;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%), url("../images/chia_16.png");
+    background-size: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
+    z-index: -1;
+}
+
+.nav{
+    --padding-container:0;
+}
+
+#login-section {
+    position: absolute;
+    right: 10%; /* Ubica el formulario a la derecha */
+    top: 60%; /* Ubica el formulario un poco más abajo de la mitad de la pantalla */
+    transform: translateY(-50%); /* Centra verticalmente el formulario con respecto a su punto superior */
+    margin-bottom: 1px;
+    background-color: #f4f4f4; /* Puedes mantener el fondo o cambiarlo según prefieras */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade un efecto de sombra */
+    color: black;
+}
+
+.login-btn{
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+    max-height: 1000px;
+    position: relative;
+    display: grid;
+    grid-template-rows: 100px 1fr;
+    background-color: transparent;
+    color: #fff;
+}
+
+#login-section {
+    position: absolute;
+    right: 10%;
+    top: 60%;
+    transform: translateY(-50%);
+    margin-bottom: 1px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.login-btn {
+    cursor: pointer;
+}
+
+#action-buttons {
+    position: absolute;
+    top: 70%; /* Cambiado a 70% para centrar verticalmente los botones */
+    left: 50%; /* Alineación horizontal */
+    transform: translate(-50%, -50%); /* Centrado horizontal y vertical */
+    text-align: center;
+}
+
+.action-btn {
+    cursor: pointer;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.action-btn:hover {
+    background-color: #218838;
+}
+
+/*----------------------------------------------  */
+
+#mantadmin {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea */
+    margin-top: 20px; 
+    margin-left: 2%; /* Separación del borde izquierdo */
+    margin-bottom: 40%; /* Separación del borde superior */
+}
+
+.button-grp {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se dividan en columnas */
+    gap: 20px; /* Espacio entre los botones */
+    width: 35%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.mante-btn {
+    background-color: #28a745; /* Color de fondo verde */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px 12px; /* Espaciado interno ajustado */
+    font-size: 20px; /* Tamaño de fuente ajustado */
+    width: calc(50% - 20px); /* Dos botones por fila */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 5px 0;
+}
+
+/* Opcional: Efecto hover para los botones */
+.mante-btn:hover {
+    background-color: #218838; /* Color de fondo cuando se pasa el mouse */
+}
+
+/*----------------------------------------*/
+#diagnosticos, #groups, #headquarters, #incomes, #medications, #permissions-groups,
+#permissions, #specialities, #staff, #tipdocs, #users, #logs, #score {
+    position: absolute;
+    top: 45%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    width: 28%; /* Reducido al 80% de 35% */
+    padding: 16px; /* Reducido al 80% de 20px */
+    background-color: #f9f9f9;
+    border-radius: 4px; /* Ajustado para mantener proporción */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra ligeramente reducida */
+    color: black;
+    font-size: 0.8em; /* Reducido al 80% del tamaño de fuente */
+}
+
+#diagnosis-create-form,
+#read-section,
+#update-section,
+#group-create-form,
+#group-read-section,
+#group-update-section {
+    margin-bottom: 16px;
+    width: 100%; 
+}
+
+h3 {
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9em;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-size: 0.9em;
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#search-output, #group-search-output {
+    margin-top: 16px;
+}
+
+/*------------------ Formulario de Usuario en Dos Columnas ----------------*/
+
+/* Contenedor de formularios en dos columnas */
+#user-form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 80%; /* Reduce el ancho del contenedor en un 20% */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+#user-create-form,
+#user-update-form {
+    width: 48%; /* Ajusta para mantener el diseño de dos columnas */
+    padding: 14px; /* Reduce ligeramente el padding para adaptarse al tamaño */
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#users {
+    position: absolute;
+    top: 45%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 45%; /* Reduce el ancho de la sección en general */
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+    font-size: 0.8em;
+}
+
+#users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+#users-table th,
+#users-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.action-btn {
+    margin-top: 8px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.action-btn:hover {
+    background-color: #218838;
+}
+
+
+/* Sección de búsqueda y lista */
+#user-search-list-container {
+    width: 100%;
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#user-search-list-container h3 {
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+#user-search-list-container input[type="number"],
+#user-search-list-container button {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-bottom: 12px;
+}
+
+#user-search-list-container button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#user-search-list-container button:hover {
+    background-color: #218838;
+}
+
+#user-search-list-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+#user-search-list-container th,
+#user-search-list-container td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
