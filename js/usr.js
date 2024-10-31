@@ -10,6 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const usersSection = document.getElementById("users");
     const usersBtn = document.getElementById("usr-btn");
 
+    // Establecer estilo para scroll en la tabla de usuarios
+    document.getElementById("users-table").style.cssText = `
+        display: block;
+        max-height: 200px; /* Ajusta el tamaño según tu preferencia */
+        overflow-y: scroll;
+        width: 100%;
+    `;
+
     // Función para codificar en Base64
     function encodeBase64(str) {
         return btoa(str);
@@ -18,6 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función para obtener la fecha y hora actual en formato ISO
     function getCurrentDateTimeISO() {
         return new Date().toISOString();
+    }
+
+    // Validar contraseña
+    function isPasswordValid(password) {
+        const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        return passwordPattern.test(password);
     }
 
     // Función para ocultar todas las secciones
@@ -45,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 usersTable.innerHTML = "";
-                updateUserIDSelect.innerHTML = "";
+                updateUserIDSelect.innerHTML = '<option value="">Seleccione un usuario</option>';
                 data.forEach((user) => {
                     const row = usersTable.insertRow();
                     row.innerHTML = `
@@ -76,6 +90,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Llenar campos de actualización automáticamente al seleccionar un usuario
+    updateUserIDSelect.addEventListener("change", () => {
+        const selectedUserId = updateUserIDSelect.value;
+        if (!selectedUserId) return; // Si no hay selección, salir
+
+        fetch(`https://nursenotes.somee.com/apiUsers/${selectedUserId}`)
+            .then(response => response.json())
+            .then(user => {
+                document.getElementById("update-user-name").value = user.name;
+                document.getElementById("update-user-lastname").value = user.lastname;
+                document.getElementById("update-user-tipdoc").value = user.tipdoc;
+                document.getElementById("update-user-numdoc").value = user.numdoc;
+                document.getElementById("update-user-usr").value = user.usr;
+                document.getElementById("update-user-grp-id").value = user.grP_ID;
+            })
+            .catch(error => console.error("Error al cargar los datos del usuario:", error));
+    });
+
     // Crear Usuario
     userCreateForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -84,10 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const lastname = document.getElementById("user-lastname").value;
         const tipdoc = document.getElementById("user-tipdoc").value;
         const numdoc = parseInt(document.getElementById("user-numdoc").value);
-        const usrpsw = document.getElementById("user-usrpsw").value; // Cifra en Base64
+        const usrpsw = document.getElementById("user-usrpsw").value;
         const usr = document.getElementById("user-usr").value;
         const grP_ID = parseInt(document.getElementById("user-grp-id").value);
-        const fchcreation = getCurrentDateTimeISO(); // Fecha y hora actual en ISO
+        const fchcreation = getCurrentDateTimeISO();
+
+        // Validar contraseña
+        if (!isPasswordValid(usrpsw)) {
+            alert("La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula y un número.");
+            return;
+        }
 
         const userData = {
             usR_ID: 0,
@@ -95,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastname: lastname,
             tipdoc: tipdoc,
             numdoc: numdoc,
-            usrpsw: usrpsw,
+            usrpsw: encodeBase64(usrpsw),
             usr: usr,
             fchcreation: fchcreation,
             grP_ID: grP_ID,
@@ -129,9 +167,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Actualizar Usuario
     updateUserBtn.addEventListener("click", (e) => {
-        e.preventDefault(); // Evita la recarga de página
+        e.preventDefault();
 
         const usR_ID = updateUserIDSelect.value;
+        const updatePassword = document.getElementById("update-user-usrpsw").value;
+
+        // Validar contraseña en la actualización
+        if (updatePassword && !isPasswordValid(updatePassword)) {
+            alert("La contraseña debe tener al menos 8 caracteres, incluir una letra mayúscula, una letra minúscula y un número.");
+            return;
+        }
+
         const userData = {
             usR_ID: parseInt(usR_ID),
             name: document.getElementById("update-user-name").value,
@@ -139,16 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
             tipdoc: document.getElementById("update-user-tipdoc").value,
             numdoc: parseInt(document.getElementById("update-user-numdoc").value),
             usr: document.getElementById("update-user-usr").value,
-            usrpsw: encodeBase64(document.getElementById("update-user-usrpsw").value),
+            usrpsw: encodeBase64(updatePassword),
             grP_ID: parseInt(document.getElementById("update-user-grp-id").value),
-            fchcreation: getCurrentDateTimeISO(), // Asegurando formato de fecha
+            fchcreation: getCurrentDateTimeISO(),
             group: {
                 grP_ID: parseInt(document.getElementById("update-user-grp-id").value),
-                grpdsc: "" // Deja en blanco si no es necesario un valor específico
+                grpdsc: ""
             }
         };
-
-        console.log("Datos enviados al backend:", userData);
 
         fetch(`https://nursenotes.somee.com/apiUsers/${usR_ID}`, {
             method: "PUT",
@@ -159,19 +203,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) {
                     return response.json().then((errorData) => {
                         console.error("Error en la respuesta del servidor:", errorData);
-                        if (errorData.errors) {
-                            // Mostrar errores específicos de validación
-                            for (const [field, messages] of Object.entries(errorData.errors)) {
-                                console.error(`Error en el campo ${field}: ${messages.join(", ")}`);
-                            }
-                        }
                         throw new Error("Error al actualizar el usuario");
                     });
                 }
                 return response.json();
             })
             .then(() => {
-                loadUsers(); // Recargar la lista de usuarios
+                loadUsers();
                 updateUserIDSelect.selectedIndex = 0;
                 document.getElementById("update-user-name").value = "";
                 document.getElementById("update-user-lastname").value = "";

@@ -41,10 +41,10 @@
 
             </form>
         </section>
-
+<!-- 
         <div class="test-button" style="text-align: center; margin-top: 20px;">
-            <button id="test-login-btn" class="login-btn">Simular Login Exitoso</button>
-        </div>
+            <button id="test-login-btn" class="login-btn">Registrese</button>
+        </div> -->
 
         <section id="action-buttons" style="display: none;"> <!-- Asegúrate de que el id esté bien -->
             <div class="button-group">
@@ -69,6 +69,17 @@
                 <button id="usr-btn" class="mante-btn">Usuarios</button>
                 <button id="score-btn" class="mante-btn">Score</button>
 
+            </div>
+        </section>
+
+        <section id="notasenf" style="display: none; margin-top: 20px;"> <!-- Sección adicional oculta para Notas de Enfermería -->
+            <div class="button-grp">
+                <button id="folios-btn" class="mante-btn">Folios</button>
+                <button id="notas-enfermeria-btn" class="mante-btn">Notas Enfermería</button>
+                <button id="datos-pacientes-btn" class="mante-btn">Datos Pacientes</button>
+                <button id="pacientes-btn" class="mante-btn">Pacientes</button>
+                <button id="signos-btn" class="mante-btn">Signos</button>
+                <button id="medicamentos-paciente-btn" class="mante-btn">Medicamentos_X_Paciente</button>
             </div>
         </section>
 
@@ -814,12 +825,378 @@
             </table>
         </section>
         
+        <!--  -->
+
+        <section id="patients" style="display: none; margin-top: 20px;"> <!-- Sección Pacientes -->
+            <h2>Gestión de Pacientes</h2>
+        
+            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+            <div id="patient-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                
+                <!-- Formulario para Crear Paciente (a la derecha) -->
+                <div style="width: 48%;">
+                    <h3>Crear Paciente</h3>
+                    <form id="patient-create-form">
+                        <div>
+                            <label for="patient-name">Nombre:</label>
+                            <input type="text" id="patient-name" name="patient-name" required>
+                        </div>
+                        <div>
+                            <label for="patient-lastname">Apellido:</label>
+                            <input type="text" id="patient-lastname" name="patient-lastname" required>
+                        </div>
+                        <div>
+                            <label for="patient-tipdoc-id">Tipo Documento ID:</label>
+                            <input type="number" id="patient-tipdoc-id" name="patient-tipdoc-id" required>
+                        </div>
+                        <div>
+                            <label for="patient-numdoc">Número Documento:</label>
+                            <input type="number" id="patient-numdoc" name="patient-numdoc" required>
+                        </div>
+                        <div>
+                            <label for="patient-age">Edad:</label>
+                            <input type="number" id="patient-age" name="patient-age" required>
+                        </div>
+                        <div>
+                            <label for="patient-numcontact">Número de Contacto:</label>
+                            <input type="number" id="patient-numcontact" name="patient-numcontact" required>
+                        </div>
+                        <div>
+                            <label for="patient-mail">Correo Electrónico:</label>
+                            <input type="email" id="patient-mail" name="patient-mail" required>
+                        </div>
+                        <button type="submit" class="action-btn">Crear Paciente</button>
+                    </form>
+                </div>
+        
+                <!-- Formulario para Actualizar Paciente (a la izquierda) -->
+                <div style="width: 48%;">
+                    <h3>Actualizar Paciente</h3>
+                    <form id="patient-update-form">
+                        <label for="update-patient-id">Seleccionar ID del Paciente:</label>
+                        <select id="update-patient-id" required></select>
+        
+                        <div>
+                            <label for="update-patient-name">Nombre:</label>
+                            <input type="text" id="update-patient-name" name="update-patient-name" required>
+                        </div>
+                        <div>
+                            <label for="update-patient-lastname">Apellido:</label>
+                            <input type="text" id="update-patient-lastname" name="update-patient-lastname" required>
+                        </div>
+                        <div>
+                            <label for="update-patient-tipdoc-id">Tipo Documento ID:</label>
+                            <input type="number" id="update-patient-tipdoc-id" name="update-patient-tipdoc-id" required>
+                        </div>
+                        <div>
+                            <label for="update-patient-numdoc">Número Documento:</label>
+                            <input type="number" id="update-patient-numdoc" name="update-patient-numdoc" required>
+                        </div>
+                        <div>
+                            <label for="update-patient-age">Edad:</label>
+                            <input type="number" id="update-patient-age" name="update-patient-age" required>
+                        </div>
+                        <div>
+                            <label for="update-patient-numcontact">Número de Contacto:</label>
+                            <input type="number" id="update-patient-numcontact" name="update-patient-numcontact" required>
+                        </div>
+                        <div>
+                            <label for="update-patient-mail">Correo Electrónico:</label>
+                            <input type="email" id="update-patient-mail" name="update-patient-mail" required>
+                        </div>
+                        <button id="update-patient-btn" class="action-btn">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Contenedor de Búsqueda y Lista de Pacientes -->
+            <div style="margin-top: 20px;">
+                <h3>Buscar Paciente</h3>
+                <input type="number" id="search-patient-id" placeholder="Ingrese ID del Paciente" required>
+                <button id="search-patient-btn" class="action-btn">Buscar Paciente</button>
+                <div id="patient-search-output"></div>
+        
+                <h3>Lista de Pacientes</h3>
+                <table id="patients-table">
+                    <thead>
+                        <tr>
+                            <th>ID Paciente</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Tipo Documento ID</th>
+                            <th>Número Documento</th>
+                            <th>Edad</th>
+                            <th>Número de Contacto</th>
+                            <th>Correo Electrónico</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!--  -->
+
+        <section id="patient-records" style="display: none; margin-top: 20px;"> <!-- Sección Registros de Pacientes -->
+            <h2>Gestión de Registros de Pacientes</h2>
+        
+            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+            <div id="patient-record-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                
+                <!-- Formulario para Crear Registro de Paciente (a la derecha) -->
+                <div style="width: 48%;">
+                    <h3>Crear Registro de Paciente</h3>
+                    <form id="patient-record-create-form">
+                        <div>
+                            <label for="record-rh">RH:</label>
+                            <input type="text" id="record-rh" name="record-rh" required>
+                        </div>
+                        <div>
+                            <label for="record-allergies">¿Tiene Alergias?:</label>
+                            <input type="checkbox" id="record-allergies" name="record-allergies">
+                        </div>
+                        <div>
+                            <label for="record-allerG_DSC">Descripción de Alergias:</label>
+                            <input type="text" id="record-allerG_DSC" name="record-allerG_DSC">
+                        </div>
+                        <div>
+                            <label for="record-surgeries">¿Ha tenido Cirugías?:</label>
+                            <input type="checkbox" id="record-surgeries" name="record-surgeries">
+                        </div>
+                        <div>
+                            <label for="record-surgeR_DSC">Descripción de Cirugías:</label>
+                            <input type="text" id="record-surgeR_DSC" name="record-surgeR_DSC">
+                        </div>
+                        <div>
+                            <label for="record-income-id">ID de Ingreso:</label>
+                            <input type="number" id="record-income-id" name="record-income-id" required>
+                        </div>
+                        <button type="submit" class="action-btn">Crear Registro</button>
+                    </form>
+                </div>
+        
+                <!-- Formulario para Actualizar Registro de Paciente (a la izquierda) -->
+                <div style="width: 48%;">
+                    <h3>Actualizar Registro de Paciente</h3>
+                    <form id="patient-record-update-form">
+                        <label for="update-record-id">Seleccionar ID del Registro:</label>
+                        <select id="update-record-id" required></select>
+        
+                        <div>
+                            <label for="update-record-rh">RH:</label>
+                            <input type="text" id="update-record-rh" name="update-record-rh" required>
+                        </div>
+                        <div>
+                            <label for="update-record-allergies">¿Tiene Alergias?:</label>
+                            <input type="checkbox" id="update-record-allergies" name="update-record-allergies">
+                        </div>
+                        <div>
+                            <label for="update-record-allerG_DSC">Descripción de Alergias:</label>
+                            <input type="text" id="update-record-allerG_DSC" name="update-record-allerG_DSC">
+                        </div>
+                        <div>
+                            <label for="update-record-surgeries">¿Ha tenido Cirugías?:</label>
+                            <input type="checkbox" id="update-record-surgeries" name="update-record-surgeries">
+                        </div>
+                        <div>
+                            <label for="update-record-surgeR_DSC">Descripción de Cirugías:</label>
+                            <input type="text" id="update-record-surgeR_DSC" name="update-record-surgeR_DSC">
+                        </div>
+                        <div>
+                            <label for="update-record-income-id">ID de Ingreso:</label>
+                            <input type="number" id="update-record-income-id" name="update-record-income-id" required>
+                        </div>
+                        <button id="update-record-btn" class="action-btn">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Contenedor de Búsqueda y Lista de Registros de Pacientes -->
+            <div style="margin-top: 20px;">
+                <h3>Buscar Registro de Paciente</h3>
+                <input type="number" id="search-record-id" placeholder="Ingrese ID del Registro" required>
+                <button id="search-record-btn" class="action-btn">Buscar Registro</button>
+                <div id="record-search-output"></div>
+        
+                <h3>Lista de Registros de Pacientes</h3>
+                <table id="patient-records-table">
+                    <thead>
+                        <tr>
+                            <th>ID Registro</th>
+                            <th>RH</th>
+                            <th>Alergias</th>
+                            <th>Descripción de Alergias</th>
+                            <th>Cirugías</th>
+                            <th>Descripción de Cirugías</th>
+                            <th>ID de Ingreso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!--  -->
+
+        <section id="signs" style="display: none; margin-top: 20px;"> <!-- Sección Signos -->
+            <h2>Gestión de Signos Vitales</h2>
+        
+            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+            <div id="signs-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                
+                <!-- Formulario para Crear Signo (a la derecha) -->
+                <div style="width: 48%;">
+                    <h3>Crear Signo</h3>
+                    <form id="signs-create-form">
+                        <div>
+                            <label for="sign-note-id">ID Nota:</label>
+                            <input type="number" id="sign-note-id" name="sign-note-id" required>
+                        </div>
+                        <div>
+                            <label for="sign-temperature">Temperatura:</label>
+                            <input type="number" step="0.1" id="sign-temperature" name="sign-temperature" required>
+                        </div>
+                        <div>
+                            <label for="sign-pulse">Pulso:</label>
+                            <input type="text" id="sign-pulse" name="sign-pulse" required>
+                        </div>
+                        <button type="submit" class="action-btn">Crear Signo</button>
+                    </form>
+                </div>
+        
+                <!-- Formulario para Actualizar Signo (a la izquierda) -->
+                <div style="width: 48%;">
+                    <h3>Actualizar Signo</h3>
+                    <form id="signs-update-form">
+                        <label for="update-sign-id">Seleccionar ID del Signo:</label>
+                        <select id="update-sign-id" required></select>
+        
+                        <div>
+                            <label for="update-sign-note-id">ID Nota:</label>
+                            <input type="number" id="update-sign-note-id" name="update-sign-note-id" required>
+                        </div>
+                        <div>
+                            <label for="update-sign-temperature">Temperatura:</label>
+                            <input type="number" step="0.1" id="update-sign-temperature" name="update-sign-temperature" required>
+                        </div>
+                        <div>
+                            <label for="update-sign-pulse">Pulso:</label>
+                            <input type="text" id="update-sign-pulse" name="update-sign-pulse" required>
+                        </div>
+                        <button id="update-sign-btn" class="action-btn">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Contenedor de Búsqueda y Lista de Signos -->
+            <div style="margin-top: 20px;">
+                <h3>Buscar Signo</h3>
+                <input type="number" id="search-sign-id" placeholder="Ingrese ID del Signo" required>
+                <button id="search-sign-btn" class="action-btn">Buscar Signo</button>
+                <div id="sign-search-output"></div>
+        
+                <h3>Lista de Signos</h3>
+                <table id="signs-table">
+                    <thead>
+                        <tr>
+                            <th>ID Signo</th>
+                            <th>ID Nota</th>
+                            <th>Temperatura</th>
+                            <th>Pulso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!--  -->
+
+        <section id="supplies-patients" style="display: none; margin-top: 20px;"> <!-- Sección Suministros a Pacientes -->
+            <h2>Gestión de Suministros a Pacientes</h2>
+        
+            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+            <div id="supplies-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                
+                <!-- Formulario para Crear Suministro a Paciente (a la derecha) -->
+                <div style="width: 48%;">
+                    <h3>Crear Suministro</h3>
+                    <form id="supplies-create-form">
+                        <div>
+                            <label for="supply-cantsup">Cantidad de Suministro:</label>
+                            <input type="number" id="supply-cantsup" name="supply-cantsup" required>
+                        </div>
+                        <div>
+                            <label for="supply-income-id">ID de Ingreso:</label>
+                            <input type="number" id="supply-income-id" name="supply-income-id" required>
+                        </div>
+                        <div>
+                            <label for="supply-med-id">ID de Medicamento:</label>
+                            <input type="number" id="supply-med-id" name="supply-med-id" required>
+                        </div>
+                        <button type="submit" class="action-btn">Crear Suministro</button>
+                    </form>
+                </div>
+        
+                <!-- Formulario para Actualizar Suministro a Paciente (a la izquierda) -->
+                <div style="width: 48%;">
+                    <h3>Actualizar Suministro</h3>
+                    <form id="supplies-update-form">
+                        <label for="update-supply-id">Seleccionar ID del Suministro:</label>
+                        <select id="update-supply-id" required></select>
+        
+                        <div>
+                            <label for="update-supply-cantsup">Cantidad de Suministro:</label>
+                            <input type="number" id="update-supply-cantsup" name="update-supply-cantsup" required>
+                        </div>
+                        <div>
+                            <label for="update-supply-income-id">ID de Ingreso:</label>
+                            <input type="number" id="update-supply-income-id" name="update-supply-income-id" required>
+                        </div>
+                        <div>
+                            <label for="update-supply-med-id">ID de Medicamento:</label>
+                            <input type="number" id="update-supply-med-id" name="update-supply-med-id" required>
+                        </div>
+                        <button id="update-supply-btn" class="action-btn">Guardar Cambios</button>
+                    </form>
+                </div>
+            </div>
+        
+            <!-- Contenedor de Búsqueda y Lista de Suministros -->
+            <div style="margin-top: 20px;">
+                <h3>Buscar Suministro</h3>
+                <input type="number" id="search-supply-id" placeholder="Ingrese ID del Suministro" required>
+                <button id="search-supply-btn" class="action-btn">Buscar Suministro</button>
+                <div id="supply-search-output"></div>
+        
+                <h3>Lista de Suministros a Pacientes</h3>
+                <table id="supplies-table">
+                    <thead>
+                        <tr>
+                            <th>ID Suministro</th>
+                            <th>Cantidad</th>
+                            <th>ID Ingreso</th>
+                            <th>ID Medicamento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
 
     </header>
     <!--   --------------------------------------------------------------                             -->
 
     <script src="./js/login.js"></script>
-    <script src="./js/test.js"></script>
+    <!-- <script src="./js/test.js"></script> -->
     <script src="./js/mantenimiento.js"></script>
     <script src="./js/diagnosticos.js"></script>
     <script src="./js/groups.js"></script>
@@ -834,6 +1211,13 @@
     <script src="./js/usr.js"></script>
     <script src="./js/logs.js"></script>
     <script src="./js/score.js"></script>
+    <script src="./js/nurseenf.js"></script>
+    <script src="./js/patients.js"></script>
+    <script src="./js/ptrecords.js"></script>
+    <script src="./js/signs.js"></script>
+    <script src="./js/suppat.js"></script>
+
+
 
 
 

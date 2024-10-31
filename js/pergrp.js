@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const logsSection = document.getElementById("logs");
     const scoreSection = document.getElementById("score");
 
-
     // Función para ocultar todas las secciones
     function hideAllSections() {
         if (diagnosSection) diagnosSection.style.display = "none";
@@ -40,8 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (usersSection) usersSection.style.display = "none";
         if (logsSection) logsSection.style.display = "none";
         if (scoreSection) scoreSection.style.display = "none";
-
-        medicationsSection.style.display = "none";
     }
 
     // Evento para mostrar solo la sección de permisos por grupo
@@ -72,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     option.textContent = `${permissionGroup.pG_ID} - Grupo ${permissionGroup.grP_ID}`;
                     updatePermissionGroupIDSelect.appendChild(option);
                 });
-            });
+            })
+            .catch(error => console.error("Error al cargar permisos por grupo:", error));
     }
 
     // Función para confirmar y eliminar una fila visualmente
@@ -87,35 +85,31 @@ document.addEventListener("DOMContentLoaded", () => {
     permissionGroupCreateForm.addEventListener("submit", (e) => {
         e.preventDefault();
        
-        // Obtener los valores de los inputs (sin crear registros en otras tablas)
+        // Obtener los valores de los inputs
         const grP_ID = parseInt(document.getElementById("permission-group-grp-id").value);
-        const peR_ID =parseInt(document.getElementById("permission-group-per-id").value);
-         // Reemplaza con los datos correctos
-       
- 
-        // Validar que solo se estén enviando IDs
+        const peR_ID = parseInt(document.getElementById("permission-group-per-id").value);
+
+        // Validar que solo se estén enviando IDs válidos
         if (isNaN(grP_ID) || isNaN(peR_ID)) {
             alert("Por favor ingrese valores de ID válidos para Grupo y Permiso.");
             return;
         }
        
- 
-        // Crear el objeto de datos para la solicitud
+        // Crear el objeto de datos para la solicitud con descripciones en blanco
         const permissionGroupData = {
             pG_ID: 0,
             grP_ID: grP_ID,
             peR_ID: peR_ID,
             groups: {
-                grP_ID: 0,
-                grpdsc: ""
+                grP_ID: grP_ID,
+                grpdsc: "" // Descripción en blanco
             },
             permitions: {
-                peR_ID: 0,
-                perdsc: ""
+                peR_ID: peR_ID,
+                perdsc: "" // Descripción en blanco
             }
         };
-        console.log("Enviando IDs local a la API:", permissionGroupData);
- 
+
         fetch('https://nursenotes.somee.com/apiPerXGroups', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -137,14 +131,26 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error("Error en la creación del permiso por grupo:", error));
     });
-    
+
     // Actualizar Permiso por Grupo
     updatePermissionGroupBtn.addEventListener("click", () => {
-        const pG_ID = updatePermissionGroupIDSelect.value;
+        const pG_ID = parseInt(updatePermissionGroupIDSelect.value);
+        const grP_ID = parseInt(document.getElementById("update-permission-group-grp-id").value);
+        const peR_ID = parseInt(document.getElementById("update-permission-group-per-id").value);
+
+        // Crear el objeto de datos para la solicitud de actualización con descripciones en blanco
         const permissionGroupData = {
-            pG_ID: parseInt(pG_ID),
-            grP_ID: parseInt(document.getElementById("update-permission-group-grp-id").value),
-            peR_ID: parseInt(document.getElementById("update-permission-group-per-id").value),
+            pG_ID: pG_ID,
+            grP_ID: grP_ID,
+            peR_ID: peR_ID,
+            groups: {
+                grP_ID: grP_ID,
+                grpdsc: "" // Descripción en blanco
+            },
+            permitions: {
+                peR_ID: peR_ID,
+                perdsc: "" // Descripción en blanco
+            }
         };
 
         fetch(`https://nursenotes.somee.com/apiPerXGroups/${pG_ID}`, {

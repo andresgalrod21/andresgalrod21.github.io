@@ -124,12 +124,12 @@ body{
 
 /*----------------------------------------------  */
 
-#mantadmin {
+#mantadmin, #notasenf {
     display: flex;
     flex-wrap: wrap; /* Permite que los botones se envuelvan a la siguiente línea */
     margin-top: 20px; 
     margin-left: 2%; /* Separación del borde izquierdo */
-    margin-bottom: 40%; /* Separación del borde superior */
+    margin-bottom: 40%; /* Separación del borde inferior */
 }
 
 .button-grp {
@@ -152,14 +152,14 @@ body{
     margin: 5px 0;
 }
 
-/* Opcional: Efecto hover para los botones */
 .mante-btn:hover {
     background-color: #218838; /* Color de fondo cuando se pasa el mouse */
 }
 
 /*----------------------------------------*/
 #diagnosticos, #groups, #headquarters, #incomes, #medications, #permissions-groups,
-#permissions, #specialities, #staff, #tipdocs, #users, #logs, #score {
+#permissions, #specialities, #staff, #tipdocs, #users, #logs, #score, #patients,
+#patient-records, #signs, #supplies-patients {
     position: absolute;
     top: 45%;
     left: 60%;
@@ -334,4 +334,68 @@ button:hover {
     padding: 8px;
     border: 1px solid #ddd;
     text-align: left;
+}
+
+
+#patients {
+    position: absolute;
+    top: 45%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 55%; /* Ancho ajustado para que no se desborde */
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+    font-size: 0.9em;
+}
+
+#patient-form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%; /* Mantiene el ancho completo del contenedor */
+}
+
+#patient-create-form,
+#patient-update-form {
+    width: 48%; /* Ajusta los formularios para dos columnas */
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#patients-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+#patients-table th,
+#patients-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+/* Botones */
+.action-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.action-btn:hover {
+    background-color: #218838;
+}
+
+#patient-search-output {
+    margin-top: 16px;
 }
