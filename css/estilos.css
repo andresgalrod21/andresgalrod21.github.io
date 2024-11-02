@@ -159,7 +159,7 @@ body{
 /*----------------------------------------*/
 #diagnosticos, #groups, #headquarters, #incomes, #medications, #permissions-groups,
 #permissions, #specialities, #staff, #tipdocs, #users, #logs, #score, #patients,
-#patient-records, #signs, #supplies-patients {
+#patient-records, #signs, #supplies-patients, #folios, #nurse-note-section {
     position: absolute;
     top: 45%;
     left: 60%;
@@ -399,3 +399,126 @@ button:hover {
 #patient-search-output {
     margin-top: 16px;
 }
+
+
+/*  */
+
+#nurse-note-section {
+    position: absolute;
+    top: 45%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    width: 55%; /* Aumenta el ancho para que se visualice correctamente */
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+    font-size: 0.9em;
+}
+
+#nurse-note-form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%; /* Mantiene el ancho completo del contenedor */
+}
+
+#nurse-note-create-form,
+#nurse-note-update-form {
+    width: 48%; /* Ajusta los formularios para que se vean en dos columnas */
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#nurse-notes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+#nurse-notes-table th,
+#nurse-notes-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+
+/* Estilos base para los tres botones independientes */
+#back-button-1, #back-button-2, #back-button-3 {
+    position: absolute;
+    top: 90%;                        /* Ajuste de posición */
+    left: 10%;                       /* Centrado horizontal */
+    transform: translate(-50%, -50%); /* Centrado exacto */
+    padding: 10px 20px;              /* Tamaño de padding */
+    background-color: #28a745;       /* Color de fondo verde */
+    color: black;                    /* Color del texto */
+    border: none;                    /* Sin borde */
+    border-radius: 5px;              /* Bordes redondeados */
+    font-size: 1rem;                 /* Tamaño de fuente */
+    cursor: pointer;                 /* Cursor de mano */
+    transition: transform 0.3s ease; /* Transición para efecto hover */
+    display: none;                   /* Ocultos por defecto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Efecto de sombra */
+}
+
+/* Mostrar botones cuando tengan la clase `show` */
+#back-button-1.show, #back-button-2.show, #back-button-3.show {
+    display: block;
+}
+
+/* Efecto hover para los tres botones específicos */
+#back-button-1:hover, #back-button-2:hover, #back-button-3:hover {
+    transform: translate(-50%, -50%) scale(1.15); /* Aumento de 15% en tamaño */
+    background-color: #0f5a21;                    /* Fondo más oscuro */
+}
+
+/* Imagen dentro del botón */
+#back-button-2 img, #back-button-2 img, #back-button-3 img {
+    width: 24px; /* Tamaño adecuado de la imagen */
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px; /* Espacio entre icono y texto */
+}
+
+/* Ajuste de posición entre botones para separación */
+
+#back-button-2:hover, #back-button-2:hover, #back-button-3:hover {
+    transform: translate(-50%, -50%) scale(1.15); /* Aumento de 15% en tamaño */
+    background-color: #0f5a21;                    /* Fondo más oscuro */
+}
+
+/* Imagen dentro del botón */
+#back-button-2 img, #back-button-2 img, #back-button-3 img {
+    width: 24px; /* Tamaño adecuado de la imagen */
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px; /* Espacio entre icono y texto */
+}
+
+#back-button-3 img, #back-button-2 img, #back-button-3 img {
+    width: 24px; /* Tamaño adecuado de la imagen */
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px; /* Espacio entre icono y texto */
+}
+
+/* Ajuste de posición entre botones para separación */
+
+#back-button-3:hover, #back-button-2:hover, #back-button-3:hover {
+    transform: translate(-50%, -50%) scale(1.15); /* Aumento de 15% en tamaño */
+    background-color: #0f5a21;                    /* Fondo más oscuro */
+}
+
+/* Imagen dentro del botón */
+#back-button-3 img, #back-button-2 img, #back-button-3 img {
+    width: 24px; /* Tamaño adecuado de la imagen */
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 8px; /* Espacio entre icono y texto */
+}
+

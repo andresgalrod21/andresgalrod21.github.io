@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const showMoreBtn = document.getElementById('mnt-btn');
+    const firstBackButton = document.getElementById('back-button-1');
+    const secondBackButton = document.getElementById('back-button-2');
 
     if (showMoreBtn) {
         showMoreBtn.addEventListener('click', function() {
@@ -16,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Mostrar "more-options"
             moreOptions.style.display = 'block';
+
+            // Ocultar el primer botón y mostrar el segundo
+            if (firstBackButton && secondBackButton) {
+                firstBackButton.style.display = 'none';
+                secondBackButton.style.display = 'block';
+            }
         });
     }
 });

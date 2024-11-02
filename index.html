@@ -1,1198 +1,2057 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NurseNotes</title>
-    <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/estilos.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <header class="hero">
-        <nav class="nav container">
-            <div class="nav_logo">
-                <h2 class="nav_title">NurseNotes</h2>
-            </div>
-        </nav>
+      <nav class="nav container">
+        <div class="nav_logo">
+          <h2 class="nav_title">NurseNotes</h2>
+        </div>
+      </nav>
 
-        <section class="hero_container container">
-            <h1 class="hero_title">Sistema Notas de Enfermeria UDEC</h1>
+      <section class="hero_container container">
+        <h1 class="hero_title">Sistema Notas de Enfermeria UDEC</h1>
+      </section>
 
-        </section>
-
-        <section id="login-section">
-            <h2 class="login-title">Iniciar Sesión</h2>
-            <form action="/login" method="post" class="login-form">
-                <div class="login-field">
-                    <label for="username">Usuario:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="login-field">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="btnlogin-field">
-                    <button type="submit" class="login-btn">Entrar</button>
-                </div>
-
-            </form>
-        </section>
-<!-- 
+      <section id="login-section">
+        <h2 class="login-title">Iniciar Sesión</h2>
+        <form action="/login" method="post" class="login-form">
+          <div class="login-field">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="login-field">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="btnlogin-field">
+            <button type="submit" class="login-btn">Entrar</button>
+          </div>
+        </form>
+      </section>
+      <!-- 
         <div class="test-button" style="text-align: center; margin-top: 20px;">
             <button id="test-login-btn" class="login-btn">Registrese</button>
         </div> -->
 
-        <section id="action-buttons" style="display: none;"> <!-- Asegúrate de que el id esté bien -->
-            <div class="button-group">
-                <button id="mnt-btn" class="action-btn">Mantenimiento del Sistema</button>
-                <button id="nt-btn" class="action-btn">Registro de Notas de Enfermería</button>
-            </div>
-        </section>
+      <section id="action-buttons" style="display: none">
+        <!-- Asegúrate de que el id esté bien -->
+        <div class="button-group">
+          <button id="mnt-btn" class="action-btn">
+            Mantenimiento del Sistema
+          </button>
+          <button id="nt-btn" class="action-btn">
+            Registro de Notas de Enfermería
+          </button>
+        </div>
+      </section>
 
-        <section id="mantadmin" style="display: none; margin-top: 20px;"> <!-- Sección adicional oculta -->
-            <div class="button-grp">
-                <button id="diag-btn" class="mante-btn">Diagnósticos</button>
-                <button id="groups-btn" class="mante-btn">Grupos</button>
-                <button id="sedes-btn" class="mante-btn">Sedes</button>
-                <button id="income-btn" class="mante-btn">Ingresos</button>
-                <button id="med-btn" class="mante-btn">Medicamentos</button>
-                <button id="pergrp-btn" class="mante-btn">Permisos por Grupo</button>
-                <button id="per-btn" class="mante-btn">Permisos</button>
-                <button id="espe-btn" class="mante-btn">Especialidades</button>
-                <button id="staff-btn" class="mante-btn">Staff</button>
-                <button id="tipdoc-btn" class="mante-btn">Tipo Documentos</button>
-                <button id="logs-btn" class="mante-btn">Logs Usuario</button>
-                <button id="usr-btn" class="mante-btn">Usuarios</button>
-                <button id="score-btn" class="mante-btn">Score</button>
+      <section id="mantadmin" style="display: none; margin-top: 20px">
+        <!-- Sección adicional oculta -->
+        <div class="button-grp">
+          <button id="diag-btn" class="mante-btn">Diagnósticos</button>
+          <button id="groups-btn" class="mante-btn">Grupos</button>
+          <button id="sedes-btn" class="mante-btn">Sedes</button>
+          <button id="income-btn" class="mante-btn">Ingresos</button>
+          <button id="med-btn" class="mante-btn">Medicamentos</button>
+          <button id="pergrp-btn" class="mante-btn">Permisos por Grupo</button>
+          <button id="per-btn" class="mante-btn">Permisos</button>
+          <button id="espe-btn" class="mante-btn">Especialidades</button>
+          <button id="staff-btn" class="mante-btn">Staff</button>
+          <button id="tipdoc-btn" class="mante-btn">Tipo Documentos</button>
+          <button id="logs-btn" class="mante-btn">Logs Usuario</button>
+          <button id="usr-btn" class="mante-btn">Usuarios</button>
+          <button id="score-btn" class="mante-btn">Score</button>
+        </div>
+      </section>
 
-            </div>
-        </section>
+      <section id="notasenf" style="display: none; margin-top: 20px">
+        <!-- Sección adicional oculta para Notas de Enfermería -->
+        <div class="button-grp">
+          <button id="folios-btn" class="mante-btn">Folios</button>
+          <button id="notas-enfermeria-btn" class="mante-btn">
+            Notas Enfermería
+          </button>
+          <button id="datos-pacientes-btn" class="mante-btn">
+            Datos Pacientes
+          </button>
+          <button id="pacientes-btn" class="mante-btn">Pacientes</button>
+          <button id="signos-btn" class="mante-btn">Signos</button>
+          <button id="medicamentos-paciente-btn" class="mante-btn">
+            Medicamentos_X_Paciente
+          </button>
+        </div>
+      </section>
 
-        <section id="notasenf" style="display: none; margin-top: 20px;"> <!-- Sección adicional oculta para Notas de Enfermería -->
-            <div class="button-grp">
-                <button id="folios-btn" class="mante-btn">Folios</button>
-                <button id="notas-enfermeria-btn" class="mante-btn">Notas Enfermería</button>
-                <button id="datos-pacientes-btn" class="mante-btn">Datos Pacientes</button>
-                <button id="pacientes-btn" class="mante-btn">Pacientes</button>
-                <button id="signos-btn" class="mante-btn">Signos</button>
-                <button id="medicamentos-paciente-btn" class="mante-btn">Medicamentos_X_Paciente</button>
-            </div>
-        </section>
+      <section id="diagnosticos" style="display: none; margin-top: 20px">
+        <!-- Sección Diagnosticos -->
+        <h2>Gestión de Diagnósticos</h2>
 
-        <section id="diagnosticos" style="display: none; margin-top: 20px;"> <!-- Sección Diagnosticos -->
-            <h2>Gestión de Diagnósticos</h2>
-
-            <!-- Formulario para Crear un Diagnóstico -->
+        <!-- Formulario para Crear un Diagnóstico -->
+        <div>
+          <h3>Crear Diagnóstico</h3>
+          <form id="diagnosis-create-form">
             <div>
-                <h3>Crear Diagnóstico</h3>
-                <form id="diagnosis-create-form">
+              <label for="diag-dsc">Descripción del Diagnóstico:</label>
+              <input type="text" id="diag-dsc" name="diag-dsc" required />
+            </div>
+            <button type="submit" class="action-btn">Crear Diagnóstico</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Leer Diagnóstico -->
+        <div>
+          <h3>Buscar Diagnóstico</h3>
+          <input
+            type="number"
+            id="read-diag-id"
+            placeholder="Ingrese ID"
+            required
+          />
+          <button id="read-btn" class="action-btn">Buscar Diagnóstico</button>
+          <div id="read-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Diagnóstico -->
+        <div>
+          <h3>Actualizar Diagnóstico</h3>
+          <label for="update-diag-id">Seleccionar ID:</label>
+          <select id="update-diag-id" required></select>
+
+          <div>
+            <label for="update-diag-dsc">Nueva Descripción:</label>
+            <input
+              type="text"
+              id="update-diag-dsc"
+              name="update-diag-dsc"
+              required
+            />
+          </div>
+          <button id="update-btn" class="action-btn">Guardar Cambios</button>
+        </div>
+
+        <h3>Lista de Diagnósticos</h3>
+        <table id="diagnosis-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+      <section id="groups" style="display: none; margin-top: 20px">
+        <!-- Sección Grupos -->
+        <h2>Gestión de Grupos</h2>
+
+        <!-- Formulario para Crear un Grupo -->
+        <div>
+          <h3>Crear Grupo</h3>
+          <form id="group-create-form">
+            <div>
+              <label for="group-desc">Descripción del Grupo:</label>
+              <input type="text" id="group-desc" name="group-desc" required />
+            </div>
+            <button type="submit" class="action-btn">Crear Grupo</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Grupo -->
+        <div>
+          <h3>Buscar Grupo</h3>
+          <input
+            type="number"
+            id="search-group-id"
+            placeholder="Ingrese ID de Grupo"
+            required
+          />
+          <button id="search-group-btn" class="action-btn">Buscar Grupo</button>
+          <div id="group-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Grupo -->
+        <div>
+          <h3>Actualizar Grupo</h3>
+          <label for="update-group-id">Seleccionar ID de Grupo:</label>
+          <select id="update-group-id" required></select>
+
+          <div>
+            <label for="update-group-desc">Nueva Descripción:</label>
+            <input
+              type="text"
+              id="update-group-desc"
+              name="update-group-desc"
+              required
+            />
+          </div>
+          <button id="update-group-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Grupos</h3>
+        <table id="groups-table">
+          <thead>
+            <tr>
+              <th>ID de Grupo</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="headquarters" style="display: none; margin-top: 20px">
+        <!-- Sección Sedes -->
+        <h2>Gestión de Sedes</h2>
+
+        <!-- Formulario para Crear una Sede -->
+        <div>
+          <h3>Crear Sede</h3>
+          <form id="headquarter-create-form">
+            <div>
+              <label for="headquarter-desc">Descripción de la Sede:</label>
+              <input
+                type="text"
+                id="headquarter-desc"
+                name="headquarter-desc"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Sede</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Sede -->
+        <div>
+          <h3>Buscar Sede</h3>
+          <input
+            type="number"
+            id="search-headquarter-id"
+            placeholder="Ingrese ID de Sede"
+            required
+          />
+          <button id="search-headquarter-btn" class="action-btn">
+            Buscar Sede
+          </button>
+          <div id="headquarter-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Sede -->
+        <div>
+          <h3>Actualizar Sede</h3>
+          <label for="update-headquarter-id">Seleccionar ID de Sede:</label>
+          <select id="update-headquarter-id" required></select>
+
+          <div>
+            <label for="update-headquarter-desc">Nueva Descripción:</label>
+            <input
+              type="text"
+              id="update-headquarter-desc"
+              name="update-headquarter-desc"
+              required
+            />
+          </div>
+          <button id="update-headquarter-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Sedes</h3>
+        <table id="headquarters-table">
+          <thead>
+            <tr>
+              <th>ID de Sede</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="incomes" style="display: none; margin-top: 20px">
+        <!-- Sección Ingresos -->
+        <h2>Gestión de Ingresos</h2>
+
+        <!-- Formulario para Crear un Ingreso -->
+        <div>
+          <h3>Crear Ingreso</h3>
+          <form id="income-create-form">
+            <div>
+              <label for="income-tipdoc-id">ID de Tipo Documento:</label>
+              <input
+                type="number"
+                id="income-tipdoc-id"
+                name="income-tipdoc-id"
+                required
+              />
+            </div>
+            <div>
+              <label for="income-patient-id">ID del Paciente:</label>
+              <input
+                type="number"
+                id="income-patient-id"
+                name="income-patient-id"
+                required
+              />
+            </div>
+            <div>
+              <label for="income-user-id">ID del Usuario:</label>
+              <input
+                type="number"
+                id="income-user-id"
+                name="income-user-id"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Ingreso</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Ingreso -->
+        <div>
+          <h3>Buscar Ingreso</h3>
+          <input
+            type="number"
+            id="search-income-id"
+            placeholder="Ingrese ID de Ingreso"
+            required
+          />
+          <button id="search-income-btn" class="action-btn">
+            Buscar Ingreso
+          </button>
+          <div id="income-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Ingreso -->
+        <div>
+          <h3>Actualizar Ingreso</h3>
+          <label for="update-income-id">Seleccionar ID de Ingreso:</label>
+          <select id="update-income-id" required></select>
+
+          <div>
+            <label for="update-income-tipdoc-id">ID de Tipo Documento:</label>
+            <input
+              type="number"
+              id="update-income-tipdoc-id"
+              name="update-income-tipdoc-id"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-income-patient-id">ID del Paciente:</label>
+            <input
+              type="number"
+              id="update-income-patient-id"
+              name="update-income-patient-id"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-income-user-id">ID del Usuario:</label>
+            <input
+              type="number"
+              id="update-income-user-id"
+              name="update-income-user-id"
+              required
+            />
+          </div>
+          <button id="update-income-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Ingresos</h3>
+        <table id="incomes-table">
+          <thead>
+            <tr>
+              <th>ID de Ingreso</th>
+              <th>Tipo Documento</th>
+              <th>ID Paciente</th>
+              <th>ID Usuario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="medications" style="display: none; margin-top: 20px">
+        <!-- Sección Medicamentos -->
+        <h2>Gestión de Medicamentos</h2>
+
+        <!-- Formulario para Crear un Medicamento -->
+        <div>
+          <h3>Crear Medicamento</h3>
+          <form id="medication-create-form">
+            <div>
+              <label for="medication-desc">Descripción del Medicamento:</label>
+              <input
+                type="text"
+                id="medication-desc"
+                name="medication-desc"
+                required
+              />
+            </div>
+            <div>
+              <label for="medication-stock">Stock:</label>
+              <input
+                type="number"
+                id="medication-stock"
+                name="medication-stock"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Medicamento</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Medicamento -->
+        <div>
+          <h3>Buscar Medicamento</h3>
+          <input
+            type="number"
+            id="search-medication-id"
+            placeholder="Ingrese ID de Medicamento"
+            required
+          />
+          <button id="search-medication-btn" class="action-btn">
+            Buscar Medicamento
+          </button>
+          <div id="medication-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Medicamento -->
+        <div>
+          <h3>Actualizar Medicamento</h3>
+          <label for="update-medication-id"
+            >Seleccionar ID de Medicamento:</label
+          >
+          <select id="update-medication-id" required></select>
+
+          <div>
+            <label for="update-medication-desc">Nueva Descripción:</label>
+            <input
+              type="text"
+              id="update-medication-desc"
+              name="update-medication-desc"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-medication-stock">Nuevo Stock:</label>
+            <input
+              type="number"
+              id="update-medication-stock"
+              name="update-medication-stock"
+              required
+            />
+          </div>
+          <button id="update-medication-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Medicamentos</h3>
+        <table id="medications-table">
+          <thead>
+            <tr>
+              <th>ID de Medicamento</th>
+              <th>Descripción</th>
+              <th>Stock</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="permissions-groups" style="display: none; margin-top: 20px">
+        <!-- Sección Permisos por Grupo -->
+        <h2>Gestión de Permisos por Grupo</h2>
+
+        <!-- Formulario para Crear un Permiso por Grupo -->
+        <div>
+          <h3>Crear Permiso por Grupo</h3>
+          <form id="permission-group-create-form">
+            <div>
+              <label for="permission-group-grp-id">ID de Grupo:</label>
+              <input
+                type="number"
+                id="permission-group-grp-id"
+                name="permission-group-grp-id"
+                required
+              />
+            </div>
+            <div>
+              <label for="permission-group-per-id">ID de Permiso:</label>
+              <input
+                type="number"
+                id="permission-group-per-id"
+                name="permission-group-per-id"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Permiso</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Permiso por Grupo -->
+        <div>
+          <h3>Buscar Permiso por Grupo</h3>
+          <input
+            type="number"
+            id="search-permission-group-id"
+            placeholder="Ingrese ID de Permiso por Grupo"
+            required
+          />
+          <button id="search-permission-group-btn" class="action-btn">
+            Buscar Permiso
+          </button>
+          <div id="permission-group-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Permiso por Grupo -->
+        <div>
+          <h3>Actualizar Permiso por Grupo</h3>
+          <label for="update-permission-group-id"
+            >Seleccionar ID de Permiso por Grupo:</label
+          >
+          <select id="update-permission-group-id" required></select>
+
+          <div>
+            <label for="update-permission-group-grp-id">ID de Grupo:</label>
+            <input
+              type="number"
+              id="update-permission-group-grp-id"
+              name="update-permission-group-grp-id"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-permission-group-per-id">ID de Permiso:</label>
+            <input
+              type="number"
+              id="update-permission-group-per-id"
+              name="update-permission-group-per-id"
+              required
+            />
+          </div>
+          <button id="update-permission-group-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Permisos por Grupo</h3>
+        <table id="permissions-groups-table">
+          <thead>
+            <tr>
+              <th>ID de Permiso por Grupo</th>
+              <th>ID de Grupo</th>
+              <th>ID de Permiso</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="permissions" style="display: none; margin-top: 20px">
+        <!-- Sección Permisos -->
+        <h2>Gestión de Permisos</h2>
+
+        <!-- Formulario para Crear un Permiso -->
+        <div>
+          <h3>Crear Permiso</h3>
+          <form id="permission-create-form">
+            <div>
+              <label for="permission-desc">Descripción del Permiso:</label>
+              <input
+                type="text"
+                id="permission-desc"
+                name="permission-desc"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Permiso</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Permiso -->
+        <div>
+          <h3>Buscar Permiso</h3>
+          <input
+            type="number"
+            id="search-permission-id"
+            placeholder="Ingrese ID de Permiso"
+            required
+          />
+          <button id="search-permission-btn" class="action-btn">
+            Buscar Permiso
+          </button>
+          <div id="permission-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Permiso -->
+        <div>
+          <h3>Actualizar Permiso</h3>
+          <label for="update-permission-id">Seleccionar ID de Permiso:</label>
+          <select id="update-permission-id" required></select>
+
+          <div>
+            <label for="update-permission-desc">Nueva Descripción:</label>
+            <input
+              type="text"
+              id="update-permission-desc"
+              name="update-permission-desc"
+              required
+            />
+          </div>
+          <button id="update-permission-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Permisos</h3>
+        <table id="permissions-table">
+          <thead>
+            <tr>
+              <th>ID de Permiso</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <!-- Sección Especialidades -->
+      <section id="specialities" style="display: none; margin-top: 20px">
+        <h2>Gestión de Especialidades</h2>
+
+        <!-- Formulario para Crear Especialidad -->
+        <div>
+          <h3>Crear Especialidad</h3>
+          <form id="speciality-create-form">
+            <div>
+              <label for="speciality-desc"
+                >Descripción de la Especialidad:</label
+              >
+              <input
+                type="text"
+                id="speciality-desc"
+                name="speciality-desc"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Especialidad</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Especialidad -->
+        <div>
+          <h3>Buscar Especialidad</h3>
+          <input
+            type="number"
+            id="search-speciality-id"
+            placeholder="Ingrese ID de Especialidad"
+            required
+          />
+          <button id="search-speciality-btn" class="action-btn">
+            Buscar Especialidad
+          </button>
+          <div id="speciality-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Especialidad -->
+        <div>
+          <h3>Actualizar Especialidad</h3>
+          <label for="update-speciality-id"
+            >Seleccionar ID de Especialidad:</label
+          >
+          <select id="update-speciality-id" required></select>
+
+          <div>
+            <label for="update-speciality-desc">Nueva Descripción:</label>
+            <input
+              type="text"
+              id="update-speciality-desc"
+              name="update-speciality-desc"
+              required
+            />
+          </div>
+          <button id="update-speciality-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <!-- Lista de Especialidades -->
+        <h3>Lista de Especialidades</h3>
+        <table id="specialities-table">
+          <thead>
+            <tr>
+              <th>ID de Especialidad</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <section id="staff" style="display: none; margin-top: 20px">
+        <!-- Sección Staff -->
+        <h2>Gestión de Staff</h2>
+
+        <!-- Formulario para Crear Staff -->
+        <div>
+          <h3>Crear Staff</h3>
+          <form id="staff-create-form">
+            <div>
+              <label for="staff-medstaff">Nombre del Staff:</label>
+              <input
+                type="text"
+                id="staff-medstaff"
+                name="staff-medstaff"
+                required
+              />
+            </div>
+            <div>
+              <label for="staff-spec-id">ID Especialidad:</label>
+              <input
+                type="number"
+                id="staff-spec-id"
+                name="staff-spec-id"
+                required
+              />
+            </div>
+            <div>
+              <label for="staff-headquarter-id">ID Sede:</label>
+              <input
+                type="number"
+                id="staff-headquarter-id"
+                name="staff-headquarter-id"
+                required
+              />
+            </div>
+            <div>
+              <label for="staff-user-id">ID Usuario:</label>
+              <input
+                type="number"
+                id="staff-user-id"
+                name="staff-user-id"
+                required
+              />
+            </div>
+            <button type="submit" class="action-btn">Crear Staff</button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Staff -->
+        <div>
+          <h3>Buscar Staff</h3>
+          <input
+            type="number"
+            id="search-staff-id"
+            placeholder="Ingrese ID de Staff"
+            required
+          />
+          <button id="search-staff-btn" class="action-btn">Buscar Staff</button>
+          <div id="staff-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Staff -->
+        <div>
+          <h3>Actualizar Staff</h3>
+          <label for="update-staff-id">Seleccionar ID de Staff:</label>
+          <select id="update-staff-id" required></select>
+
+          <div>
+            <label for="update-staff-medstaff">Nombre del Staff:</label>
+            <input
+              type="text"
+              id="update-staff-medstaff"
+              name="update-staff-medstaff"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-staff-spec-id">ID Especialidad:</label>
+            <input
+              type="number"
+              id="update-staff-spec-id"
+              name="update-staff-spec-id"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-staff-headquarter-id">ID Sede:</label>
+            <input
+              type="number"
+              id="update-staff-headquarter-id"
+              name="update-staff-headquarter-id"
+              required
+            />
+          </div>
+          <div>
+            <label for="update-staff-user-id">ID Usuario:</label>
+            <input
+              type="number"
+              id="update-staff-user-id"
+              name="update-staff-user-id"
+              required
+            />
+          </div>
+          <button id="update-staff-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Staff</h3>
+        <table id="staff-table">
+          <thead>
+            <tr>
+              <th>ID Staff</th>
+              <th>Nombre</th>
+              <th>ID Especialidad</th>
+              <th>ID Sede</th>
+              <th>ID Usuario</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="tipdocs" style="display: none; margin-top: 20px">
+        <!-- Sección Tipo Documentos -->
+        <h2>Gestión de Tipo Documentos</h2>
+
+        <!-- Formulario para Crear Tipo Documento -->
+        <div>
+          <h3>Crear Tipo Documento</h3>
+          <form id="tipdoc-create-form">
+            <div>
+              <label for="tipdoc-desc">Descripción del Tipo Documento:</label>
+              <input type="text" id="tipdoc-desc" name="tipdoc-desc" required />
+            </div>
+            <button type="submit" class="action-btn">
+              Crear Tipo Documento
+            </button>
+          </form>
+        </div>
+
+        <!-- Formulario para Buscar Tipo Documento -->
+        <div>
+          <h3>Buscar Tipo Documento</h3>
+          <input
+            type="number"
+            id="search-tipdoc-id"
+            placeholder="Ingrese ID del Tipo Documento"
+            required
+          />
+          <button id="search-tipdoc-btn" class="action-btn">
+            Buscar Tipo Documento
+          </button>
+          <div id="tipdoc-search-output"></div>
+        </div>
+
+        <!-- Formulario para Actualizar Tipo Documento -->
+        <div>
+          <h3>Actualizar Tipo Documento</h3>
+          <label for="update-tipdoc-id"
+            >Seleccionar ID del Tipo Documento:</label
+          >
+          <select id="update-tipdoc-id" required></select>
+
+          <div>
+            <label for="update-tipdoc-desc"
+              >Descripción del Tipo Documento:</label
+            >
+            <input
+              type="text"
+              id="update-tipdoc-desc"
+              name="update-tipdoc-desc"
+              required
+            />
+          </div>
+          <button id="update-tipdoc-btn" class="action-btn">
+            Guardar Cambios
+          </button>
+        </div>
+
+        <h3>Lista de Tipo Documentos</h3>
+        <table id="tipdocs-table">
+          <thead>
+            <tr>
+              <th>ID Tipo Documento</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="users" style="display: none; margin-top: 20px">
+        <!-- Sección Usuarios -->
+        <h2>Gestión de Usuarios</h2>
+
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div
+          id="user-form-container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <!-- Formulario para Crear Usuario (a la derecha) -->
+          <div style="width: 48%">
+            <h3>Crear Usuario</h3>
+            <form id="user-create-form">
+              <div>
+                <label for="user-name">Nombre:</label>
+                <input type="text" id="user-name" name="user-name" required />
+              </div>
+              <div>
+                <label for="user-lastname">Apellido:</label>
+                <input
+                  type="text"
+                  id="user-lastname"
+                  name="user-lastname"
+                  required
+                />
+              </div>
+              <div>
+                <label for="user-tipdoc">Tipo Documento:</label>
+                <input
+                  type="text"
+                  id="user-tipdoc"
+                  name="user-tipdoc"
+                  required
+                />
+              </div>
+              <div>
+                <label for="user-numdoc">Número Documento:</label>
+                <input
+                  type="number"
+                  id="user-numdoc"
+                  name="user-numdoc"
+                  required
+                />
+              </div>
+              <div>
+                <label for="user-usr">Usuario:</label>
+                <input type="text" id="user-usr" name="user-usr" required />
+              </div>
+              <div>
+                <label for="user-usrpsw">Contraseña:</label>
+                <input
+                  type="password"
+                  id="user-usrpsw"
+                  name="user-usrpsw"
+                  required
+                />
+              </div>
+              <div>
+                <label for="user-grp-id">ID Grupo:</label>
+                <input
+                  type="number"
+                  id="user-grp-id"
+                  name="user-grp-id"
+                  required
+                />
+              </div>
+              <button type="submit" class="action-btn">Crear Usuario</button>
+            </form>
+          </div>
+
+          <!-- Formulario para Actualizar Usuario (a la izquierda) -->
+          <div style="width: 48%">
+            <h3>Actualizar Usuario</h3>
+            <form id="user-update-form">
+              <label for="update-user-id">Seleccionar ID del Usuario:</label>
+              <select id="update-user-id" required></select>
+
+              <div>
+                <label for="update-user-name">Nombre:</label>
+                <input
+                  type="text"
+                  id="update-user-name"
+                  name="update-user-name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-user-lastname">Apellido:</label>
+                <input
+                  type="text"
+                  id="update-user-lastname"
+                  name="update-user-lastname"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-user-tipdoc">Tipo Documento:</label>
+                <input
+                  type="text"
+                  id="update-user-tipdoc"
+                  name="update-user-tipdoc"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-user-numdoc">Número Documento:</label>
+                <input
+                  type="number"
+                  id="update-user-numdoc"
+                  name="update-user-numdoc"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-user-usr">Usuario:</label>
+                <input
+                  type="text"
+                  id="update-user-usr"
+                  name="update-user-usr"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-user-usrpsw">Contraseña:</label>
+                <input
+                  type="password"
+                  id="update-user-usrpsw"
+                  name="update-user-usrpsw"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-user-grp-id">ID Grupo:</label>
+                <input
+                  type="number"
+                  id="update-user-grp-id"
+                  name="update-user-grp-id"
+                  required
+                />
+              </div>
+              <button id="update-user-btn" class="action-btn">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contenedor de Búsqueda y Lista de Usuarios -->
+        <div style="margin-top: 20px">
+          <h3>Buscar Usuario</h3>
+          <input
+            type="number"
+            id="search-user-id"
+            placeholder="Ingrese ID del Usuario"
+            required
+          />
+          <button id="search-user-btn" class="action-btn">
+            Buscar Usuario
+          </button>
+          <div id="user-search-output"></div>
+
+          <h3>Lista de Usuarios</h3>
+          <table id="users-table">
+            <thead>
+              <tr>
+                <th>ID Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo Documento</th>
+                <th>Número Documento</th>
+                <th>Usuario</th>
+                <th>ID Grupo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!--  -->
+
+      <section id="logs" style="display: none; margin-top: 20px">
+        <!-- Sección Logs de Usuario -->
+        <h2>Listado de Logs de Usuario</h2>
+
+        <!-- Tabla de Logs -->
+        <h3>Lista de Logs</h3>
+        <table id="logs-table">
+          <thead>
+            <tr>
+              <th>ID Log</th>
+              <th>ID Usuario</th>
+              <th>Fecha de Modificación</th>
+              <th>Usuario que Modificó</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Los datos se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="score" style="display: none; margin-top: 20px">
+        <!-- Sección de Puntajes -->
+        <h2>Listado de Puntajes de Jugadores</h2>
+
+        <!-- Tabla de Puntajes -->
+        <h3>Lista de Puntajes</h3>
+        <table id="score-table">
+          <thead>
+            <tr>
+              <th>ID Puntaje</th>
+              <th>Nombre del Jugador</th>
+              <th>Edad</th>
+              <th>Género</th>
+              <th>Puntaje</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Los datos se cargarán aquí dinámicamente -->
+          </tbody>
+        </table>
+      </section>
+
+      <!--  -->
+
+      <section id="patients" style="display: none; margin-top: 20px">
+        <!-- Sección Pacientes -->
+        <h2>Gestión de Pacientes</h2>
+
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div
+          id="patient-form-container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <!-- Formulario para Crear Paciente (a la derecha) -->
+          <div style="width: 48%">
+            <h3>Crear Paciente</h3>
+            <form id="patient-create-form">
+              <div>
+                <label for="patient-name">Nombre:</label>
+                <input
+                  type="text"
+                  id="patient-name"
+                  name="patient-name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="patient-lastname">Apellido:</label>
+                <input
+                  type="text"
+                  id="patient-lastname"
+                  name="patient-lastname"
+                  required
+                />
+              </div>
+              <div>
+                <label for="patient-tipdoc-id">Tipo Documento ID:</label>
+                <input
+                  type="number"
+                  id="patient-tipdoc-id"
+                  name="patient-tipdoc-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="patient-numdoc">Número Documento:</label>
+                <input
+                  type="number"
+                  id="patient-numdoc"
+                  name="patient-numdoc"
+                  required
+                />
+              </div>
+              <div>
+                <label for="patient-age">Edad:</label>
+                <input
+                  type="number"
+                  id="patient-age"
+                  name="patient-age"
+                  required
+                />
+              </div>
+              <div>
+                <label for="patient-numcontact">Número de Contacto:</label>
+                <input
+                  type="number"
+                  id="patient-numcontact"
+                  name="patient-numcontact"
+                  required
+                />
+              </div>
+              <div>
+                <label for="patient-mail">Correo Electrónico:</label>
+                <input
+                  type="email"
+                  id="patient-mail"
+                  name="patient-mail"
+                  required
+                />
+              </div>
+              <button type="submit" class="action-btn">Crear Paciente</button>
+            </form>
+          </div>
+
+          <!-- Formulario para Actualizar Paciente (a la izquierda) -->
+          <div style="width: 48%">
+            <h3>Actualizar Paciente</h3>
+            <form id="patient-update-form">
+              <label for="update-patient-id"
+                >Seleccionar ID del Paciente:</label
+              >
+              <select id="update-patient-id" required></select>
+
+              <div>
+                <label for="update-patient-name">Nombre:</label>
+                <input
+                  type="text"
+                  id="update-patient-name"
+                  name="update-patient-name"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-patient-lastname">Apellido:</label>
+                <input
+                  type="text"
+                  id="update-patient-lastname"
+                  name="update-patient-lastname"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-patient-tipdoc-id">Tipo Documento ID:</label>
+                <input
+                  type="number"
+                  id="update-patient-tipdoc-id"
+                  name="update-patient-tipdoc-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-patient-numdoc">Número Documento:</label>
+                <input
+                  type="number"
+                  id="update-patient-numdoc"
+                  name="update-patient-numdoc"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-patient-age">Edad:</label>
+                <input
+                  type="number"
+                  id="update-patient-age"
+                  name="update-patient-age"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-patient-numcontact"
+                  >Número de Contacto:</label
+                >
+                <input
+                  type="number"
+                  id="update-patient-numcontact"
+                  name="update-patient-numcontact"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-patient-mail">Correo Electrónico:</label>
+                <input
+                  type="email"
+                  id="update-patient-mail"
+                  name="update-patient-mail"
+                  required
+                />
+              </div>
+              <button id="update-patient-btn" class="action-btn">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contenedor de Búsqueda y Lista de Pacientes -->
+        <div style="margin-top: 20px">
+          <h3>Buscar Paciente</h3>
+          <input
+            type="number"
+            id="search-patient-id"
+            placeholder="Ingrese ID del Paciente"
+            required
+          />
+          <button id="search-patient-btn" class="action-btn">
+            Buscar Paciente
+          </button>
+          <div id="patient-search-output"></div>
+
+          <h3>Lista de Pacientes</h3>
+          <table id="patients-table">
+            <thead>
+              <tr>
+                <th>ID Paciente</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo Documento ID</th>
+                <th>Número Documento</th>
+                <th>Edad</th>
+                <th>Número de Contacto</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+      <!--  -->
+
+      <section id="patient-records" style="display: none; margin-top: 20px">
+        <!-- Sección Registros de Pacientes -->
+        <h2>Gestión de Registros de Pacientes</h2>
+
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div
+          id="patient-record-form-container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <!-- Formulario para Crear Registro de Paciente (a la derecha) -->
+          <div style="width: 48%">
+            <h3>Crear Registro de Paciente</h3>
+            <form id="patient-record-create-form">
+              <div>
+                <label for="record-rh">RH:</label>
+                <input type="text" id="record-rh" name="record-rh" required />
+              </div>
+              <div>
+                <label for="record-allergies">¿Tiene Alergias?:</label>
+                <input
+                  type="checkbox"
+                  id="record-allergies"
+                  name="record-allergies"
+                />
+              </div>
+              <div>
+                <label for="record-allerG_DSC">Descripción de Alergias:</label>
+                <input
+                  type="text"
+                  id="record-allerG_DSC"
+                  name="record-allerG_DSC"
+                />
+              </div>
+              <div>
+                <label for="record-surgeries">¿Ha tenido Cirugías?:</label>
+                <input
+                  type="checkbox"
+                  id="record-surgeries"
+                  name="record-surgeries"
+                />
+              </div>
+              <div>
+                <label for="record-surgeR_DSC">Descripción de Cirugías:</label>
+                <input
+                  type="text"
+                  id="record-surgeR_DSC"
+                  name="record-surgeR_DSC"
+                />
+              </div>
+              <div>
+                <label for="record-income-id">ID de Ingreso:</label>
+                <input
+                  type="number"
+                  id="record-income-id"
+                  name="record-income-id"
+                  required
+                />
+              </div>
+              <button type="submit" class="action-btn">Crear Registro</button>
+            </form>
+          </div>
+
+          <!-- Formulario para Actualizar Registro de Paciente (a la izquierda) -->
+          <div style="width: 48%">
+            <h3>Actualizar Registro de Paciente</h3>
+            <form id="patient-record-update-form">
+              <label for="update-record-id">Seleccionar ID del Registro:</label>
+              <select id="update-record-id" required></select>
+
+              <div>
+                <label for="update-record-rh">RH:</label>
+                <input
+                  type="text"
+                  id="update-record-rh"
+                  name="update-record-rh"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-record-allergies">¿Tiene Alergias?:</label>
+                <input
+                  type="checkbox"
+                  id="update-record-allergies"
+                  name="update-record-allergies"
+                />
+              </div>
+              <div>
+                <label for="update-record-allerG_DSC"
+                  >Descripción de Alergias:</label
+                >
+                <input
+                  type="text"
+                  id="update-record-allerG_DSC"
+                  name="update-record-allerG_DSC"
+                />
+              </div>
+              <div>
+                <label for="update-record-surgeries"
+                  >¿Ha tenido Cirugías?:</label
+                >
+                <input
+                  type="checkbox"
+                  id="update-record-surgeries"
+                  name="update-record-surgeries"
+                />
+              </div>
+              <div>
+                <label for="update-record-surgeR_DSC"
+                  >Descripción de Cirugías:</label
+                >
+                <input
+                  type="text"
+                  id="update-record-surgeR_DSC"
+                  name="update-record-surgeR_DSC"
+                />
+              </div>
+              <div>
+                <label for="update-record-income-id">ID de Ingreso:</label>
+                <input
+                  type="number"
+                  id="update-record-income-id"
+                  name="update-record-income-id"
+                  required
+                />
+              </div>
+              <button id="update-record-btn" class="action-btn">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contenedor de Búsqueda y Lista de Registros de Pacientes -->
+        <div style="margin-top: 20px">
+          <h3>Buscar Registro de Paciente</h3>
+          <input
+            type="number"
+            id="search-record-id"
+            placeholder="Ingrese ID del Registro"
+            required
+          />
+          <button id="search-record-btn" class="action-btn">
+            Buscar Registro
+          </button>
+          <div id="record-search-output"></div>
+
+          <h3>Lista de Registros de Pacientes</h3>
+          <table id="patient-records-table">
+            <thead>
+              <tr>
+                <th>ID Registro</th>
+                <th>RH</th>
+                <th>Alergias</th>
+                <th>Descripción de Alergias</th>
+                <th>Cirugías</th>
+                <th>Descripción de Cirugías</th>
+                <th>ID de Ingreso</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!--  -->
+
+      <section id="signs" style="display: none; margin-top: 20px">
+        <!-- Sección Signos -->
+        <h2>Gestión de Signos Vitales</h2>
+
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div
+          id="signs-form-container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <!-- Formulario para Crear Signo (a la derecha) -->
+          <div style="width: 48%">
+            <h3>Crear Signo</h3>
+            <form id="signs-create-form">
+              <div>
+                <label for="sign-note-id">ID Nota:</label>
+                <input
+                  type="number"
+                  id="sign-note-id"
+                  name="sign-note-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="sign-temperature">Temperatura:</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  id="sign-temperature"
+                  name="sign-temperature"
+                  required
+                />
+              </div>
+              <div>
+                <label for="sign-pulse">Pulso:</label>
+                <input type="text" id="sign-pulse" name="sign-pulse" required />
+              </div>
+              <button type="submit" class="action-btn">Crear Signo</button>
+            </form>
+          </div>
+
+          <!-- Formulario para Actualizar Signo (a la izquierda) -->
+          <div style="width: 48%">
+            <h3>Actualizar Signo</h3>
+            <form id="signs-update-form">
+              <label for="update-sign-id">Seleccionar ID del Signo:</label>
+              <select id="update-sign-id" required></select>
+
+              <div>
+                <label for="update-sign-note-id">ID Nota:</label>
+                <input
+                  type="number"
+                  id="update-sign-note-id"
+                  name="update-sign-note-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-sign-temperature">Temperatura:</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  id="update-sign-temperature"
+                  name="update-sign-temperature"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-sign-pulse">Pulso:</label>
+                <input
+                  type="text"
+                  id="update-sign-pulse"
+                  name="update-sign-pulse"
+                  required
+                />
+              </div>
+              <button id="update-sign-btn" class="action-btn">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contenedor de Búsqueda y Lista de Signos -->
+        <div style="margin-top: 20px">
+          <h3>Buscar Signo</h3>
+          <input
+            type="number"
+            id="search-sign-id"
+            placeholder="Ingrese ID del Signo"
+            required
+          />
+          <button id="search-sign-btn" class="action-btn">Buscar Signo</button>
+          <div id="sign-search-output"></div>
+
+          <h3>Lista de Signos</h3>
+          <table id="signs-table">
+            <thead>
+              <tr>
+                <th>ID Signo</th>
+                <th>ID Nota</th>
+                <th>Temperatura</th>
+                <th>Pulso</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!--  -->
+
+      <section id="supplies-patients" style="display: none; margin-top: 20px">
+        <!-- Sección Suministros a Pacientes -->
+        <h2>Gestión de Suministros a Pacientes</h2>
+
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div
+          id="supplies-form-container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <!-- Formulario para Crear Suministro a Paciente (a la derecha) -->
+          <div style="width: 48%">
+            <h3>Crear Suministro</h3>
+            <form id="supplies-create-form">
+              <div>
+                <label for="supply-cantsup">Cantidad de Suministro:</label>
+                <input
+                  type="number"
+                  id="supply-cantsup"
+                  name="supply-cantsup"
+                  required
+                />
+              </div>
+              <div>
+                <label for="supply-income-id">ID de Ingreso:</label>
+                <input
+                  type="number"
+                  id="supply-income-id"
+                  name="supply-income-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="supply-med-id">ID de Medicamento:</label>
+                <input
+                  type="number"
+                  id="supply-med-id"
+                  name="supply-med-id"
+                  required
+                />
+              </div>
+              <button type="submit" class="action-btn">Crear Suministro</button>
+            </form>
+          </div>
+
+          <!-- Formulario para Actualizar Suministro a Paciente (a la izquierda) -->
+          <div style="width: 48%">
+            <h3>Actualizar Suministro</h3>
+            <form id="supplies-update-form">
+              <label for="update-supply-id"
+                >Seleccionar ID del Suministro:</label
+              >
+              <select id="update-supply-id" required></select>
+
+              <div>
+                <label for="update-supply-cantsup"
+                  >Cantidad de Suministro:</label
+                >
+                <input
+                  type="number"
+                  id="update-supply-cantsup"
+                  name="update-supply-cantsup"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-supply-income-id">ID de Ingreso:</label>
+                <input
+                  type="number"
+                  id="update-supply-income-id"
+                  name="update-supply-income-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-supply-med-id">ID de Medicamento:</label>
+                <input
+                  type="number"
+                  id="update-supply-med-id"
+                  name="update-supply-med-id"
+                  required
+                />
+              </div>
+              <button id="update-supply-btn" class="action-btn">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contenedor de Búsqueda y Lista de Suministros -->
+        <div style="margin-top: 20px">
+          <h3>Buscar Suministro</h3>
+          <input
+            type="number"
+            id="search-supply-id"
+            placeholder="Ingrese ID del Suministro"
+            required
+          />
+          <button id="search-supply-btn" class="action-btn">
+            Buscar Suministro
+          </button>
+          <div id="supply-search-output"></div>
+
+          <h3>Lista de Suministros a Pacientes</h3>
+          <table id="supplies-table">
+            <thead>
+              <tr>
+                <th>ID Suministro</th>
+                <th>Cantidad</th>
+                <th>ID Ingreso</th>
+                <th>ID Medicamento</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!--  -->
+
+      <section id="folios" style="display: none; margin-top: 20px">
+        <!-- Sección Folios -->
+        <h2>Gestión de Folios</h2>
+
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div
+          id="folio-form-container"
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <!-- Formulario para Crear Folio (a la derecha) -->
+          <div style="width: 48%">
+            <h3>Crear Folio</h3>
+            <form id="folio-create-form">
+              <div>
+                <label for="folio-income-id">ID de Ingreso:</label>
+                <input
+                  type="number"
+                  id="folio-income-id"
+                  name="folio-income-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="folio-note-id">ID de Nota:</label>
+                <input
+                  type="number"
+                  id="folio-note-id"
+                  name="folio-note-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="folio-sup-id">ID de Suministro:</label>
+                <input
+                  type="number"
+                  id="folio-sup-id"
+                  name="folio-sup-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="folio-user-id">ID de Usuario:</label>
+                <input
+                  type="number"
+                  id="folio-user-id"
+                  name="folio-user-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="folio-evolution">Evolución:</label>
+                <textarea
+                  id="folio-evolution"
+                  name="folio-evolution"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="action-btn">Crear Folio</button>
+            </form>
+          </div>
+
+          <!-- Formulario para Actualizar Folio (a la izquierda) -->
+          <div style="width: 48%">
+            <h3>Actualizar Folio</h3>
+            <form id="folio-update-form">
+              <label for="update-folio-id">Seleccionar ID del Folio:</label>
+              <select id="update-folio-id" required></select>
+
+              <div>
+                <label for="update-folio-income-id">ID de Ingreso:</label>
+                <input
+                  type="number"
+                  id="update-folio-income-id"
+                  name="update-folio-income-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-folio-note-id">ID de Nota:</label>
+                <input
+                  type="number"
+                  id="update-folio-note-id"
+                  name="update-folio-note-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-folio-sup-id">ID de Suministro:</label>
+                <input
+                  type="number"
+                  id="update-folio-sup-id"
+                  name="update-folio-sup-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-folio-user-id">ID de Usuario:</label>
+                <input
+                  type="number"
+                  id="update-folio-user-id"
+                  name="update-folio-user-id"
+                  required
+                />
+              </div>
+              <div>
+                <label for="update-folio-evolution">Evolución:</label>
+                <textarea
+                  id="update-folio-evolution"
+                  name="update-folio-evolution"
+                  required
+                ></textarea>
+              </div>
+              <button id="update-folio-btn" class="action-btn">
+                Guardar Cambios
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contenedor de Búsqueda y Lista de Folios -->
+        <div style="margin-top: 20px">
+          <h3>Buscar Folio</h3>
+          <input
+            type="number"
+            id="search-folio-id"
+            placeholder="Ingrese ID del Folio"
+            required
+          />
+          <button id="search-folio-btn" class="action-btn">Buscar Folio</button>
+          <div id="folio-search-output"></div>
+
+          <h3>Lista de Folios</h3>
+          <table id="folios-table">
+            <thead>
+              <tr>
+                <th>ID Folio</th>
+                <th>ID Ingreso</th>
+                <th>ID Nota</th>
+                <th>ID Suministro</th>
+                <th>ID Usuario</th>
+                <th>Evolución</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!--  -->
+
+      <section id="nurse-note-section" style="display: none; margin-top: 20px;"> <!-- Sección NurseNote -->
+        <h2>Gestión de Notas de Enfermería</h2>
+    
+        <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
+        <div id="nurse-note-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            
+            <!-- Formulario para Crear Nota de Enfermería (a la derecha) -->
+            <div style="width: 48%;">
+                <h3>Crear Nota de Enfermería</h3>
+                <form id="nurse-note-create-form">
                     <div>
-                        <label for="diag-dsc">Descripción del Diagnóstico:</label>
-                        <input type="text" id="diag-dsc" name="diag-dsc" required>
+                        <label for="nurse-income-id">ID de Ingreso:</label>
+                        <input type="number" id="nurse-income-id" name="nurse-income-id" required>
                     </div>
-                    <button type="submit" class="action-btn">Crear Diagnóstico</button>
+                    <div>
+                        <label for="nurse-patient-id">ID Paciente:</label>
+                        <input type="number" id="nurse-patient-id" name="nurse-patient-id" required>
+                    </div>
+                    <div>
+                        <label for="nurse-reason-consult">Motivo de Consulta:</label>
+                        <textarea id="nurse-reason-consult" name="nurse-reason-consult" required></textarea>
+                    </div>
+                    <div>
+                        <label for="nurse-diagnosis-id">ID Diagnóstico:</label>
+                        <input type="number" id="nurse-diagnosis-id" name="nurse-diagnosis-id" required>
+                    </div>
+                    <div>
+                        <label for="nurse-specialty-id">ID Especialidad:</label>
+                        <input type="number" id="nurse-specialty-id" name="nurse-specialty-id" required>
+                    </div>
+                    <div>
+                        <label for="nurse-user-id">ID Usuario:</label>
+                        <input type="number" id="nurse-user-id" name="nurse-user-id" required>
+                    </div>
+                    <div>
+                        <label for="nurse-staff-id">ID Personal:</label>
+                        <input type="number" id="nurse-staff-id" name="nurse-staff-id" required>
+                    </div>
+                    <button type="submit" class="action-btn">Crear Nota</button>
                 </form>
             </div>
-
-            <!-- Formulario para Leer Diagnóstico -->
-            <div>
-                <h3>Buscar Diagnóstico</h3>
-                <input type="number" id="read-diag-id" placeholder="Ingrese ID" required>
-                <button id="read-btn" class="action-btn">Buscar Diagnóstico</button>
-                <div id="read-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Diagnóstico -->
-            <div>
-                <h3>Actualizar Diagnóstico</h3>
-                <label for="update-diag-id">Seleccionar ID:</label>
-                <select id="update-diag-id" required></select>
-
-                <div>
-                    <label for="update-diag-dsc">Nueva Descripción:</label>
-                    <input type="text" id="update-diag-dsc" name="update-diag-dsc" required>
-                </div>
-                <button id="update-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Diagnósticos</h3>
-            <table id="diagnosis-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-        <section id="groups" style="display: none; margin-top: 20px;"> <!-- Sección Grupos -->
-            <h2>Gestión de Grupos</h2>
-
-            <!-- Formulario para Crear un Grupo -->
-            <div>
-                <h3>Crear Grupo</h3>
-                <form id="group-create-form">
+    
+            <!-- Formulario para Actualizar Nota de Enfermería (a la izquierda) -->
+            <div style="width: 48%;">
+                <h3>Actualizar Nota de Enfermería</h3>
+                <form id="nurse-note-update-form">
+                    <label for="update-nurse-note-id">Seleccionar ID de la Nota:</label>
+                    <select id="update-nurse-note-id" required></select>
+    
                     <div>
-                        <label for="group-desc">Descripción del Grupo:</label>
-                        <input type="text" id="group-desc" name="group-desc" required>
+                        <label for="update-nurse-income-id">ID de Ingreso:</label>
+                        <input type="number" id="update-nurse-income-id" name="update-nurse-income-id" required>
                     </div>
-                    <button type="submit" class="action-btn">Crear Grupo</button>
+                    <div>
+                        <label for="update-nurse-patient-id">ID Paciente:</label>
+                        <input type="number" id="update-nurse-patient-id" name="update-nurse-patient-id" required>
+                    </div>
+                    <div>
+                        <label for="update-nurse-reason-consult">Motivo de Consulta:</label>
+                        <textarea id="update-nurse-reason-consult" name="update-nurse-reason-consult" required></textarea>
+                    </div>
+                    <div>
+                        <label for="update-nurse-diagnosis-id">ID Diagnóstico:</label>
+                        <input type="number" id="update-nurse-diagnosis-id" name="update-nurse-diagnosis-id" required>
+                    </div>
+                    <div>
+                        <label for="update-nurse-specialty-id">ID Especialidad:</label>
+                        <input type="number" id="update-nurse-specialty-id" name="update-nurse-specialty-id" required>
+                    </div>
+                    <div>
+                        <label for="update-nurse-user-id">ID Usuario:</label>
+                        <input type="number" id="update-nurse-user-id" name="update-nurse-user-id" required>
+                    </div>
+                    <div>
+                        <label for="update-nurse-staff-id">ID Personal:</label>
+                        <input type="number" id="update-nurse-staff-id" name="update-nurse-staff-id" required>
+                    </div>
+                    <button id="update-nurse-note-btn" class="action-btn">Guardar Cambios</button>
                 </form>
             </div>
-
-            <!-- Formulario para Buscar Grupo -->
-            <div>
-                <h3>Buscar Grupo</h3>
-                <input type="number" id="search-group-id" placeholder="Ingrese ID de Grupo" required>
-                <button id="search-group-btn" class="action-btn">Buscar Grupo</button>
-                <div id="group-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Grupo -->
-            <div>
-                <h3>Actualizar Grupo</h3>
-                <label for="update-group-id">Seleccionar ID de Grupo:</label>
-                <select id="update-group-id" required></select>
-
-                <div>
-                    <label for="update-group-desc">Nueva Descripción:</label>
-                    <input type="text" id="update-group-desc" name="update-group-desc" required>
-                </div>
-                <button id="update-group-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Grupos</h3>
-            <table id="groups-table">
+        </div>
+    
+        <!-- Contenedor de Búsqueda y Lista de Notas de Enfermería -->
+        <div style="margin-top: 20px;">
+            <h3>Buscar Nota de Enfermería</h3>
+            <input type="number" id="search-nurse-note-id" placeholder="Ingrese ID de la Nota" required>
+            <button id="search-nurse-note-btn" class="action-btn">Buscar Nota</button>
+            <div id="nurse-note-search-output"></div>
+    
+            <h3>Lista de Notas de Enfermería</h3>
+            <table id="nurse-notes-table">
                 <thead>
                     <tr>
-                        <th>ID de Grupo</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-        <section id="headquarters" style="display: none; margin-top: 20px;"> <!-- Sección Sedes -->
-            <h2>Gestión de Sedes</h2>
-
-            <!-- Formulario para Crear una Sede -->
-            <div>
-                <h3>Crear Sede</h3>
-                <form id="headquarter-create-form">
-                    <div>
-                        <label for="headquarter-desc">Descripción de la Sede:</label>
-                        <input type="text" id="headquarter-desc" name="headquarter-desc" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Sede</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Sede -->
-            <div>
-                <h3>Buscar Sede</h3>
-                <input type="number" id="search-headquarter-id" placeholder="Ingrese ID de Sede" required>
-                <button id="search-headquarter-btn" class="action-btn">Buscar Sede</button>
-                <div id="headquarter-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Sede -->
-            <div>
-                <h3>Actualizar Sede</h3>
-                <label for="update-headquarter-id">Seleccionar ID de Sede:</label>
-                <select id="update-headquarter-id" required></select>
-
-                <div>
-                    <label for="update-headquarter-desc">Nueva Descripción:</label>
-                    <input type="text" id="update-headquarter-desc" name="update-headquarter-desc" required>
-                </div>
-                <button id="update-headquarter-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Sedes</h3>
-            <table id="headquarters-table">
-                <thead>
-                    <tr>
-                        <th>ID de Sede</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-
-        <section id="incomes" style="display: none; margin-top: 20px;"> <!-- Sección Ingresos -->
-            <h2>Gestión de Ingresos</h2>
-
-            <!-- Formulario para Crear un Ingreso -->
-            <div>
-                <h3>Crear Ingreso</h3>
-                <form id="income-create-form">
-                    <div>
-                        <label for="income-tipdoc-id">ID de Tipo Documento:</label>
-                        <input type="number" id="income-tipdoc-id" name="income-tipdoc-id" required>
-                    </div>
-                    <div>
-                        <label for="income-patient-id">ID del Paciente:</label>
-                        <input type="number" id="income-patient-id" name="income-patient-id" required>
-                    </div>
-                    <div>
-                        <label for="income-user-id">ID del Usuario:</label>
-                        <input type="number" id="income-user-id" name="income-user-id" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Ingreso</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Ingreso -->
-            <div>
-                <h3>Buscar Ingreso</h3>
-                <input type="number" id="search-income-id" placeholder="Ingrese ID de Ingreso" required>
-                <button id="search-income-btn" class="action-btn">Buscar Ingreso</button>
-                <div id="income-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Ingreso -->
-            <div>
-                <h3>Actualizar Ingreso</h3>
-                <label for="update-income-id">Seleccionar ID de Ingreso:</label>
-                <select id="update-income-id" required></select>
-
-                <div>
-                    <label for="update-income-tipdoc-id">ID de Tipo Documento:</label>
-                    <input type="number" id="update-income-tipdoc-id" name="update-income-tipdoc-id" required>
-                </div>
-                <div>
-                    <label for="update-income-patient-id">ID del Paciente:</label>
-                    <input type="number" id="update-income-patient-id" name="update-income-patient-id" required>
-                </div>
-                <div>
-                    <label for="update-income-user-id">ID del Usuario:</label>
-                    <input type="number" id="update-income-user-id" name="update-income-user-id" required>
-                </div>
-                <button id="update-income-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Ingresos</h3>
-            <table id="incomes-table">
-                <thead>
-                    <tr>
-                        <th>ID de Ingreso</th>
-                        <th>Tipo Documento</th>
+                        <th>ID Nota</th>
+                        <th>ID Ingreso</th>
                         <th>ID Paciente</th>
-                        <th>ID Usuario</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-        <section id="medications" style="display: none; margin-top: 20px;"> <!-- Sección Medicamentos -->
-            <h2>Gestión de Medicamentos</h2>
-
-            <!-- Formulario para Crear un Medicamento -->
-            <div>
-                <h3>Crear Medicamento</h3>
-                <form id="medication-create-form">
-                    <div>
-                        <label for="medication-desc">Descripción del Medicamento:</label>
-                        <input type="text" id="medication-desc" name="medication-desc" required>
-                    </div>
-                    <div>
-                        <label for="medication-stock">Stock:</label>
-                        <input type="number" id="medication-stock" name="medication-stock" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Medicamento</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Medicamento -->
-            <div>
-                <h3>Buscar Medicamento</h3>
-                <input type="number" id="search-medication-id" placeholder="Ingrese ID de Medicamento" required>
-                <button id="search-medication-btn" class="action-btn">Buscar Medicamento</button>
-                <div id="medication-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Medicamento -->
-            <div>
-                <h3>Actualizar Medicamento</h3>
-                <label for="update-medication-id">Seleccionar ID de Medicamento:</label>
-                <select id="update-medication-id" required></select>
-
-                <div>
-                    <label for="update-medication-desc">Nueva Descripción:</label>
-                    <input type="text" id="update-medication-desc" name="update-medication-desc" required>
-                </div>
-                <div>
-                    <label for="update-medication-stock">Nuevo Stock:</label>
-                    <input type="number" id="update-medication-stock" name="update-medication-stock" required>
-                </div>
-                <button id="update-medication-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Medicamentos</h3>
-            <table id="medications-table">
-                <thead>
-                    <tr>
-                        <th>ID de Medicamento</th>
-                        <th>Descripción</th>
-                        <th>Stock</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-        <section id="permissions-groups" style="display: none; margin-top: 20px;"> <!-- Sección Permisos por Grupo -->
-            <h2>Gestión de Permisos por Grupo</h2>
-
-            <!-- Formulario para Crear un Permiso por Grupo -->
-            <div>
-                <h3>Crear Permiso por Grupo</h3>
-                <form id="permission-group-create-form">
-                    <div>
-                        <label for="permission-group-grp-id">ID de Grupo:</label>
-                        <input type="number" id="permission-group-grp-id" name="permission-group-grp-id" required>
-                    </div>
-                    <div>
-                        <label for="permission-group-per-id">ID de Permiso:</label>
-                        <input type="number" id="permission-group-per-id" name="permission-group-per-id" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Permiso</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Permiso por Grupo -->
-            <div>
-                <h3>Buscar Permiso por Grupo</h3>
-                <input type="number" id="search-permission-group-id" placeholder="Ingrese ID de Permiso por Grupo"
-                    required>
-                <button id="search-permission-group-btn" class="action-btn">Buscar Permiso</button>
-                <div id="permission-group-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Permiso por Grupo -->
-            <div>
-                <h3>Actualizar Permiso por Grupo</h3>
-                <label for="update-permission-group-id">Seleccionar ID de Permiso por Grupo:</label>
-                <select id="update-permission-group-id" required></select>
-
-                <div>
-                    <label for="update-permission-group-grp-id">ID de Grupo:</label>
-                    <input type="number" id="update-permission-group-grp-id" name="update-permission-group-grp-id"
-                        required>
-                </div>
-                <div>
-                    <label for="update-permission-group-per-id">ID de Permiso:</label>
-                    <input type="number" id="update-permission-group-per-id" name="update-permission-group-per-id"
-                        required>
-                </div>
-                <button id="update-permission-group-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Permisos por Grupo</h3>
-            <table id="permissions-groups-table">
-                <thead>
-                    <tr>
-                        <th>ID de Permiso por Grupo</th>
-                        <th>ID de Grupo</th>
-                        <th>ID de Permiso</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-        <section id="permissions" style="display: none; margin-top: 20px;"> <!-- Sección Permisos -->
-            <h2>Gestión de Permisos</h2>
-
-            <!-- Formulario para Crear un Permiso -->
-            <div>
-                <h3>Crear Permiso</h3>
-                <form id="permission-create-form">
-                    <div>
-                        <label for="permission-desc">Descripción del Permiso:</label>
-                        <input type="text" id="permission-desc" name="permission-desc" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Permiso</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Permiso -->
-            <div>
-                <h3>Buscar Permiso</h3>
-                <input type="number" id="search-permission-id" placeholder="Ingrese ID de Permiso" required>
-                <button id="search-permission-btn" class="action-btn">Buscar Permiso</button>
-                <div id="permission-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Permiso -->
-            <div>
-                <h3>Actualizar Permiso</h3>
-                <label for="update-permission-id">Seleccionar ID de Permiso:</label>
-                <select id="update-permission-id" required></select>
-
-                <div>
-                    <label for="update-permission-desc">Nueva Descripción:</label>
-                    <input type="text" id="update-permission-desc" name="update-permission-desc" required>
-                </div>
-                <button id="update-permission-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Permisos</h3>
-            <table id="permissions-table">
-                <thead>
-                    <tr>
-                        <th>ID de Permiso</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-        <!-- Sección Especialidades -->
-        <section id="specialities" style="display: none; margin-top: 20px;">
-            <h2>Gestión de Especialidades</h2>
-
-            <!-- Formulario para Crear Especialidad -->
-            <div>
-                <h3>Crear Especialidad</h3>
-                <form id="speciality-create-form">
-                    <div>
-                        <label for="speciality-desc">Descripción de la Especialidad:</label>
-                        <input type="text" id="speciality-desc" name="speciality-desc" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Especialidad</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Especialidad -->
-            <div>
-                <h3>Buscar Especialidad</h3>
-                <input type="number" id="search-speciality-id" placeholder="Ingrese ID de Especialidad" required>
-                <button id="search-speciality-btn" class="action-btn">Buscar Especialidad</button>
-                <div id="speciality-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Especialidad -->
-            <div>
-                <h3>Actualizar Especialidad</h3>
-                <label for="update-speciality-id">Seleccionar ID de Especialidad:</label>
-                <select id="update-speciality-id" required></select>
-
-                <div>
-                    <label for="update-speciality-desc">Nueva Descripción:</label>
-                    <input type="text" id="update-speciality-desc" name="update-speciality-desc" required>
-                </div>
-                <button id="update-speciality-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <!-- Lista de Especialidades -->
-            <h3>Lista de Especialidades</h3>
-            <table id="specialities-table">
-                <thead>
-                    <tr>
-                        <th>ID de Especialidad</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-
-        <section id="staff" style="display: none; margin-top: 20px;"> <!-- Sección Staff -->
-            <h2>Gestión de Staff</h2>
-
-            <!-- Formulario para Crear Staff -->
-            <div>
-                <h3>Crear Staff</h3>
-                <form id="staff-create-form">
-                    <div>
-                        <label for="staff-medstaff">Nombre del Staff:</label>
-                        <input type="text" id="staff-medstaff" name="staff-medstaff" required>
-                    </div>
-                    <div>
-                        <label for="staff-spec-id">ID Especialidad:</label>
-                        <input type="number" id="staff-spec-id" name="staff-spec-id" required>
-                    </div>
-                    <div>
-                        <label for="staff-headquarter-id">ID Sede:</label>
-                        <input type="number" id="staff-headquarter-id" name="staff-headquarter-id" required>
-                    </div>
-                    <div>
-                        <label for="staff-user-id">ID Usuario:</label>
-                        <input type="number" id="staff-user-id" name="staff-user-id" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Staff</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Staff -->
-            <div>
-                <h3>Buscar Staff</h3>
-                <input type="number" id="search-staff-id" placeholder="Ingrese ID de Staff" required>
-                <button id="search-staff-btn" class="action-btn">Buscar Staff</button>
-                <div id="staff-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Staff -->
-            <div>
-                <h3>Actualizar Staff</h3>
-                <label for="update-staff-id">Seleccionar ID de Staff:</label>
-                <select id="update-staff-id" required></select>
-
-                <div>
-                    <label for="update-staff-medstaff">Nombre del Staff:</label>
-                    <input type="text" id="update-staff-medstaff" name="update-staff-medstaff" required>
-                </div>
-                <div>
-                    <label for="update-staff-spec-id">ID Especialidad:</label>
-                    <input type="number" id="update-staff-spec-id" name="update-staff-spec-id" required>
-                </div>
-                <div>
-                    <label for="update-staff-headquarter-id">ID Sede:</label>
-                    <input type="number" id="update-staff-headquarter-id" name="update-staff-headquarter-id" required>
-                </div>
-                <div>
-                    <label for="update-staff-user-id">ID Usuario:</label>
-                    <input type="number" id="update-staff-user-id" name="update-staff-user-id" required>
-                </div>
-                <button id="update-staff-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Staff</h3>
-            <table id="staff-table">
-                <thead>
-                    <tr>
-                        <th>ID Staff</th>
-                        <th>Nombre</th>
+                        <th>Motivo de Consulta</th>
+                        <th>ID Diagnóstico</th>
                         <th>ID Especialidad</th>
-                        <th>ID Sede</th>
                         <th>ID Usuario</th>
+                        <th>ID Personal</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
-        </section>
+        </div>
+    </section>
+    
 
+    <button id="back-button-1" class="back-button" style="display: none;">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAkJJREFUSEu1lU1oE1EQx/+zVE1tEL3VqtiDtElBi0cPQoRusPWkHswu6En8uIgg9VTblB5bDyIUxIOgkC05SA9qcXeFiuDJQk/NWwzixaP4ERC0TcauJmn262Ub6Lvtvpn/b97MvHmEHV60w/qQAo69Gt3T9WP9IoPOEmgY4H4ADOAzgFUCLe39+fX5yvWV9ahAIwEDC9lRhXkegCsqW2UFuLGmWW/CjEIBKSObB3hqG+mrgXFX6NZ9v08AkCqo0yBMbkO8acqE207OetDq6wGkjZFzDHrRiXjdpwbQaaGZ7xsaTcBQMZOsVXd/BLg3GsB5gPLSAJidnsq3443CNwGDCyM3icktasSiOaGZ4ylDdbtIuojpfEk3F12jFoD6khhj4Z7/xd29OACAHgvNvOYBpAz1C4C+IGBLPC6ACatOzjrpB/wC0O0FeMWj8uI/1WY3fd/spgN+QAVA0ivCeaHZ0+1yHkgbc0Xo9j4/wAEwEBTjcaHZc43/cWpAQKmkWUNeQEE1QMiFR7sFiQNg4JmjWVc8gLShXmbgqeQO/DtJLADzJUe3ix7A4eKp7p5q0iHgiAwC0Gy7i7axf9dweWzptwfgfqQLWZWJzXZFlezXFCiZNe31u4ZNYNgNGtkJAs90BGG+JXT7Yatv6LhOG+o9Btz2jPviVZlwxz9JAylqJdcn6yMAh9qcpgzGVaFbb8PspBH2P8kkEomuC3BnlEInwDhafzI/AfSBAfNg75/F5TPLG1FBxE1BRyWRpqhjRZ/jX3vx1Bll9BbFAAAAAElFTkSuQmCC"/>
+        Salir
+    </button>
+    
+    <button id="back-button-2" class="back-button" style="display: none;">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAkJJREFUSEu1lU1oE1EQx/+zVE1tEL3VqtiDtElBi0cPQoRusPWkHswu6En8uIgg9VTblB5bDyIUxIOgkC05SA9qcXeFiuDJQk/NWwzixaP4ERC0TcauJmn262Ub6Lvtvpn/b97MvHmEHV60w/qQAo69Gt3T9WP9IoPOEmgY4H4ADOAzgFUCLe39+fX5yvWV9ahAIwEDC9lRhXkegCsqW2UFuLGmWW/CjEIBKSObB3hqG+mrgXFX6NZ9v08AkCqo0yBMbkO8acqE207OetDq6wGkjZFzDHrRiXjdpwbQaaGZ7xsaTcBQMZOsVXd/BLg3GsB5gPLSAJidnsq3443CNwGDCyM3icktasSiOaGZ4ylDdbtIuojpfEk3F12jFoD6khhj4Z7/xd29OACAHgvNvOYBpAz1C4C+IGBLPC6ACatOzjrpB/wC0O0FeMWj8uI/1WY3fd/spgN+QAVA0ivCeaHZ0+1yHkgbc0Xo9j4/wAEwEBTjcaHZc43/cWpAQKmkWUNeQEE1QMiFR7sFiQNg4JmjWVc8gLShXmbgqeQO/DtJLADzJUe3ix7A4eKp7p5q0iHgiAwC0Gy7i7axf9dweWzptwfgfqQLWZWJzXZFlezXFCiZNe31u4ZNYNgNGtkJAs90BGG+JXT7Yatv6LhOG+o9Btz2jPviVZlwxz9JAylqJdcn6yMAh9qcpgzGVaFbb8PspBH2P8kkEomuC3BnlEInwDhafzI/AfSBAfNg75/F5TPLG1FBxE1BRyWRpqhjRZ/jX3vx1Bll9BbFAAAAAElFTkSuQmCC"/>
+        Regresar
+    </button>
+    
+    <button id="back-button-3" class="back-button" style="display: none;">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAkJJREFUSEu1lU1oE1EQx/+zVE1tEL3VqtiDtElBi0cPQoRusPWkHswu6En8uIgg9VTblB5bDyIUxIOgkC05SA9qcXeFiuDJQk/NWwzixaP4ERC0TcauJmn262Ub6Lvtvpn/b97MvHmEHV60w/qQAo69Gt3T9WP9IoPOEmgY4H4ADOAzgFUCLe39+fX5yvWV9ahAIwEDC9lRhXkegCsqW2UFuLGmWW/CjEIBKSObB3hqG+mrgXFX6NZ9v08AkCqo0yBMbkO8acqE207OetDq6wGkjZFzDHrRiXjdpwbQaaGZ7xsaTcBQMZOsVXd/BLg3GsB5gPLSAJidnsq3443CNwGDCyM3icktasSiOaGZ4ylDdbtIuojpfEk3F12jFoD6khhj4Z7/xd29OACAHgvNvOYBpAz1C4C+IGBLPC6ACatOzjrpB/wC0O0FeMWj8uI/1WY3fd/spgN+QAVA0ivCeaHZ0+1yHkgbc0Xo9j4/wAEwEBTjcaHZc43/cWpAQKmkWUNeQEE1QMiFR7sFiQNg4JmjWVc8gLShXmbgqeQO/DtJLADzJUe3ix7A4eKp7p5q0iHgiAwC0Gy7i7axf9dweWzptwfgfqQLWZWJzXZFlezXFCiZNe31u4ZNYNgNGtkJAs90BGG+JXT7Yatv6LhOG+o9Btz2jPviVZlwxz9JAylqJdcn6yMAh9qcpgzGVaFbb8PspBH2P8kkEomuC3BnlEInwDhafzI/AfSBAfNg75/F5TPLG1FBxE1BRyWRpqhjRZ/jX3vx1Bll9BbFAAAAAElFTkSuQmCC"/>
+        Regresar
+    </button>
+    
+    
 
-        <!--  -->
-
-        <section id="tipdocs" style="display: none; margin-top: 20px;"> <!-- Sección Tipo Documentos -->
-            <h2>Gestión de Tipo Documentos</h2>
-
-            <!-- Formulario para Crear Tipo Documento -->
-            <div>
-                <h3>Crear Tipo Documento</h3>
-                <form id="tipdoc-create-form">
-                    <div>
-                        <label for="tipdoc-desc">Descripción del Tipo Documento:</label>
-                        <input type="text" id="tipdoc-desc" name="tipdoc-desc" required>
-                    </div>
-                    <button type="submit" class="action-btn">Crear Tipo Documento</button>
-                </form>
-            </div>
-
-            <!-- Formulario para Buscar Tipo Documento -->
-            <div>
-                <h3>Buscar Tipo Documento</h3>
-                <input type="number" id="search-tipdoc-id" placeholder="Ingrese ID del Tipo Documento" required>
-                <button id="search-tipdoc-btn" class="action-btn">Buscar Tipo Documento</button>
-                <div id="tipdoc-search-output"></div>
-            </div>
-
-            <!-- Formulario para Actualizar Tipo Documento -->
-            <div>
-                <h3>Actualizar Tipo Documento</h3>
-                <label for="update-tipdoc-id">Seleccionar ID del Tipo Documento:</label>
-                <select id="update-tipdoc-id" required></select>
-
-                <div>
-                    <label for="update-tipdoc-desc">Descripción del Tipo Documento:</label>
-                    <input type="text" id="update-tipdoc-desc" name="update-tipdoc-desc" required>
-                </div>
-                <button id="update-tipdoc-btn" class="action-btn">Guardar Cambios</button>
-            </div>
-
-            <h3>Lista de Tipo Documentos</h3>
-            <table id="tipdocs-table">
-                <thead>
-                    <tr>
-                        <th>ID Tipo Documento</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-
-        <!--  -->
-
-        <section id="users" style="display: none; margin-top: 20px;"> <!-- Sección Usuarios -->
-            <h2>Gestión de Usuarios</h2>
-        
-            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
-            <div id="user-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                
-                <!-- Formulario para Crear Usuario (a la derecha) -->
-                <div style="width: 48%;">
-                    <h3>Crear Usuario</h3>
-                    <form id="user-create-form">
-                        <div>
-                            <label for="user-name">Nombre:</label>
-                            <input type="text" id="user-name" name="user-name" required>
-                        </div>
-                        <div>
-                            <label for="user-lastname">Apellido:</label>
-                            <input type="text" id="user-lastname" name="user-lastname" required>
-                        </div>
-                        <div>
-                            <label for="user-tipdoc">Tipo Documento:</label>
-                            <input type="text" id="user-tipdoc" name="user-tipdoc" required>
-                        </div>
-                        <div>
-                            <label for="user-numdoc">Número Documento:</label>
-                            <input type="number" id="user-numdoc" name="user-numdoc" required>
-                        </div>
-                        <div>
-                            <label for="user-usr">Usuario:</label>
-                            <input type="text" id="user-usr" name="user-usr" required>
-                        </div>
-                        <div>
-                            <label for="user-usrpsw">Contraseña:</label>
-                            <input type="password" id="user-usrpsw" name="user-usrpsw" required>
-                        </div>
-                        <div>
-                            <label for="user-grp-id">ID Grupo:</label>
-                            <input type="number" id="user-grp-id" name="user-grp-id" required>
-                        </div>
-                        <button type="submit" class="action-btn">Crear Usuario</button>
-                    </form>
-                </div>
-        
-                <!-- Formulario para Actualizar Usuario (a la izquierda) -->
-                <div style="width: 48%;">
-                    <h3>Actualizar Usuario</h3>
-                    <form id="user-update-form">
-                        <label for="update-user-id">Seleccionar ID del Usuario:</label>
-                        <select id="update-user-id" required></select>
-        
-                        <div>
-                            <label for="update-user-name">Nombre:</label>
-                            <input type="text" id="update-user-name" name="update-user-name" required>
-                        </div>
-                        <div>
-                            <label for="update-user-lastname">Apellido:</label>
-                            <input type="text" id="update-user-lastname" name="update-user-lastname" required>
-                        </div>
-                        <div>
-                            <label for="update-user-tipdoc">Tipo Documento:</label>
-                            <input type="text" id="update-user-tipdoc" name="update-user-tipdoc" required>
-                        </div>
-                        <div>
-                            <label for="update-user-numdoc">Número Documento:</label>
-                            <input type="number" id="update-user-numdoc" name="update-user-numdoc" required>
-                        </div>
-                        <div>
-                            <label for="update-user-usr">Usuario:</label>
-                            <input type="text" id="update-user-usr" name="update-user-usr" required>
-                        </div>
-                        <div>
-                            <label for="update-user-usrpsw">Contraseña:</label>
-                            <input type="password" id="update-user-usrpsw" name="update-user-usrpsw" required>
-                        </div>
-                        <div>
-                            <label for="update-user-grp-id">ID Grupo:</label>
-                            <input type="number" id="update-user-grp-id" name="update-user-grp-id" required>
-                        </div>
-                        <button id="update-user-btn" class="action-btn">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div>
-        
-            <!-- Contenedor de Búsqueda y Lista de Usuarios -->
-            <div style="margin-top: 20px;">
-                <h3>Buscar Usuario</h3>
-                <input type="number" id="search-user-id" placeholder="Ingrese ID del Usuario" required>
-                <button id="search-user-btn" class="action-btn">Buscar Usuario</button>
-                <div id="user-search-output"></div>
-        
-                <h3>Lista de Usuarios</h3>
-                <table id="users-table">
-                    <thead>
-                        <tr>
-                            <th>ID Usuario</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Tipo Documento</th>
-                            <th>Número Documento</th>
-                            <th>Usuario</th>
-                            <th>ID Grupo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!--  -->
-
-        <section id="logs" style="display: none; margin-top: 20px;"> <!-- Sección Logs de Usuario -->
-            <h2>Listado de Logs de Usuario</h2>
-        
-            <!-- Tabla de Logs -->
-            <h3>Lista de Logs</h3>
-            <table id="logs-table">
-                <thead>
-                    <tr>
-                        <th>ID Log</th>
-                        <th>ID Usuario</th>
-                        <th>Fecha de Modificación</th>
-                        <th>Usuario que Modificó</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Los datos se cargarán aquí dinámicamente -->
-                </tbody>
-            </table>
-        </section>
-        
-        <!--  -->
-
-        <section id="score" style="display: none; margin-top: 20px;"> <!-- Sección de Puntajes -->
-            <h2>Listado de Puntajes de Jugadores</h2>
-        
-            <!-- Tabla de Puntajes -->
-            <h3>Lista de Puntajes</h3>
-            <table id="score-table">
-                <thead>
-                    <tr>
-                        <th>ID Puntaje</th>
-                        <th>Nombre del Jugador</th>
-                        <th>Edad</th>
-                        <th>Género</th>
-                        <th>Puntaje</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Los datos se cargarán aquí dinámicamente -->
-                </tbody>
-            </table>
-        </section>
-        
-        <!--  -->
-
-        <section id="patients" style="display: none; margin-top: 20px;"> <!-- Sección Pacientes -->
-            <h2>Gestión de Pacientes</h2>
-        
-            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
-            <div id="patient-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                
-                <!-- Formulario para Crear Paciente (a la derecha) -->
-                <div style="width: 48%;">
-                    <h3>Crear Paciente</h3>
-                    <form id="patient-create-form">
-                        <div>
-                            <label for="patient-name">Nombre:</label>
-                            <input type="text" id="patient-name" name="patient-name" required>
-                        </div>
-                        <div>
-                            <label for="patient-lastname">Apellido:</label>
-                            <input type="text" id="patient-lastname" name="patient-lastname" required>
-                        </div>
-                        <div>
-                            <label for="patient-tipdoc-id">Tipo Documento ID:</label>
-                            <input type="number" id="patient-tipdoc-id" name="patient-tipdoc-id" required>
-                        </div>
-                        <div>
-                            <label for="patient-numdoc">Número Documento:</label>
-                            <input type="number" id="patient-numdoc" name="patient-numdoc" required>
-                        </div>
-                        <div>
-                            <label for="patient-age">Edad:</label>
-                            <input type="number" id="patient-age" name="patient-age" required>
-                        </div>
-                        <div>
-                            <label for="patient-numcontact">Número de Contacto:</label>
-                            <input type="number" id="patient-numcontact" name="patient-numcontact" required>
-                        </div>
-                        <div>
-                            <label for="patient-mail">Correo Electrónico:</label>
-                            <input type="email" id="patient-mail" name="patient-mail" required>
-                        </div>
-                        <button type="submit" class="action-btn">Crear Paciente</button>
-                    </form>
-                </div>
-        
-                <!-- Formulario para Actualizar Paciente (a la izquierda) -->
-                <div style="width: 48%;">
-                    <h3>Actualizar Paciente</h3>
-                    <form id="patient-update-form">
-                        <label for="update-patient-id">Seleccionar ID del Paciente:</label>
-                        <select id="update-patient-id" required></select>
-        
-                        <div>
-                            <label for="update-patient-name">Nombre:</label>
-                            <input type="text" id="update-patient-name" name="update-patient-name" required>
-                        </div>
-                        <div>
-                            <label for="update-patient-lastname">Apellido:</label>
-                            <input type="text" id="update-patient-lastname" name="update-patient-lastname" required>
-                        </div>
-                        <div>
-                            <label for="update-patient-tipdoc-id">Tipo Documento ID:</label>
-                            <input type="number" id="update-patient-tipdoc-id" name="update-patient-tipdoc-id" required>
-                        </div>
-                        <div>
-                            <label for="update-patient-numdoc">Número Documento:</label>
-                            <input type="number" id="update-patient-numdoc" name="update-patient-numdoc" required>
-                        </div>
-                        <div>
-                            <label for="update-patient-age">Edad:</label>
-                            <input type="number" id="update-patient-age" name="update-patient-age" required>
-                        </div>
-                        <div>
-                            <label for="update-patient-numcontact">Número de Contacto:</label>
-                            <input type="number" id="update-patient-numcontact" name="update-patient-numcontact" required>
-                        </div>
-                        <div>
-                            <label for="update-patient-mail">Correo Electrónico:</label>
-                            <input type="email" id="update-patient-mail" name="update-patient-mail" required>
-                        </div>
-                        <button id="update-patient-btn" class="action-btn">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div>
-        
-            <!-- Contenedor de Búsqueda y Lista de Pacientes -->
-            <div style="margin-top: 20px;">
-                <h3>Buscar Paciente</h3>
-                <input type="number" id="search-patient-id" placeholder="Ingrese ID del Paciente" required>
-                <button id="search-patient-btn" class="action-btn">Buscar Paciente</button>
-                <div id="patient-search-output"></div>
-        
-                <h3>Lista de Pacientes</h3>
-                <table id="patients-table">
-                    <thead>
-                        <tr>
-                            <th>ID Paciente</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Tipo Documento ID</th>
-                            <th>Número Documento</th>
-                            <th>Edad</th>
-                            <th>Número de Contacto</th>
-                            <th>Correo Electrónico</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <!--  -->
-
-        <section id="patient-records" style="display: none; margin-top: 20px;"> <!-- Sección Registros de Pacientes -->
-            <h2>Gestión de Registros de Pacientes</h2>
-        
-            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
-            <div id="patient-record-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                
-                <!-- Formulario para Crear Registro de Paciente (a la derecha) -->
-                <div style="width: 48%;">
-                    <h3>Crear Registro de Paciente</h3>
-                    <form id="patient-record-create-form">
-                        <div>
-                            <label for="record-rh">RH:</label>
-                            <input type="text" id="record-rh" name="record-rh" required>
-                        </div>
-                        <div>
-                            <label for="record-allergies">¿Tiene Alergias?:</label>
-                            <input type="checkbox" id="record-allergies" name="record-allergies">
-                        </div>
-                        <div>
-                            <label for="record-allerG_DSC">Descripción de Alergias:</label>
-                            <input type="text" id="record-allerG_DSC" name="record-allerG_DSC">
-                        </div>
-                        <div>
-                            <label for="record-surgeries">¿Ha tenido Cirugías?:</label>
-                            <input type="checkbox" id="record-surgeries" name="record-surgeries">
-                        </div>
-                        <div>
-                            <label for="record-surgeR_DSC">Descripción de Cirugías:</label>
-                            <input type="text" id="record-surgeR_DSC" name="record-surgeR_DSC">
-                        </div>
-                        <div>
-                            <label for="record-income-id">ID de Ingreso:</label>
-                            <input type="number" id="record-income-id" name="record-income-id" required>
-                        </div>
-                        <button type="submit" class="action-btn">Crear Registro</button>
-                    </form>
-                </div>
-        
-                <!-- Formulario para Actualizar Registro de Paciente (a la izquierda) -->
-                <div style="width: 48%;">
-                    <h3>Actualizar Registro de Paciente</h3>
-                    <form id="patient-record-update-form">
-                        <label for="update-record-id">Seleccionar ID del Registro:</label>
-                        <select id="update-record-id" required></select>
-        
-                        <div>
-                            <label for="update-record-rh">RH:</label>
-                            <input type="text" id="update-record-rh" name="update-record-rh" required>
-                        </div>
-                        <div>
-                            <label for="update-record-allergies">¿Tiene Alergias?:</label>
-                            <input type="checkbox" id="update-record-allergies" name="update-record-allergies">
-                        </div>
-                        <div>
-                            <label for="update-record-allerG_DSC">Descripción de Alergias:</label>
-                            <input type="text" id="update-record-allerG_DSC" name="update-record-allerG_DSC">
-                        </div>
-                        <div>
-                            <label for="update-record-surgeries">¿Ha tenido Cirugías?:</label>
-                            <input type="checkbox" id="update-record-surgeries" name="update-record-surgeries">
-                        </div>
-                        <div>
-                            <label for="update-record-surgeR_DSC">Descripción de Cirugías:</label>
-                            <input type="text" id="update-record-surgeR_DSC" name="update-record-surgeR_DSC">
-                        </div>
-                        <div>
-                            <label for="update-record-income-id">ID de Ingreso:</label>
-                            <input type="number" id="update-record-income-id" name="update-record-income-id" required>
-                        </div>
-                        <button id="update-record-btn" class="action-btn">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div>
-        
-            <!-- Contenedor de Búsqueda y Lista de Registros de Pacientes -->
-            <div style="margin-top: 20px;">
-                <h3>Buscar Registro de Paciente</h3>
-                <input type="number" id="search-record-id" placeholder="Ingrese ID del Registro" required>
-                <button id="search-record-btn" class="action-btn">Buscar Registro</button>
-                <div id="record-search-output"></div>
-        
-                <h3>Lista de Registros de Pacientes</h3>
-                <table id="patient-records-table">
-                    <thead>
-                        <tr>
-                            <th>ID Registro</th>
-                            <th>RH</th>
-                            <th>Alergias</th>
-                            <th>Descripción de Alergias</th>
-                            <th>Cirugías</th>
-                            <th>Descripción de Cirugías</th>
-                            <th>ID de Ingreso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <!--  -->
-
-        <section id="signs" style="display: none; margin-top: 20px;"> <!-- Sección Signos -->
-            <h2>Gestión de Signos Vitales</h2>
-        
-            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
-            <div id="signs-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                
-                <!-- Formulario para Crear Signo (a la derecha) -->
-                <div style="width: 48%;">
-                    <h3>Crear Signo</h3>
-                    <form id="signs-create-form">
-                        <div>
-                            <label for="sign-note-id">ID Nota:</label>
-                            <input type="number" id="sign-note-id" name="sign-note-id" required>
-                        </div>
-                        <div>
-                            <label for="sign-temperature">Temperatura:</label>
-                            <input type="number" step="0.1" id="sign-temperature" name="sign-temperature" required>
-                        </div>
-                        <div>
-                            <label for="sign-pulse">Pulso:</label>
-                            <input type="text" id="sign-pulse" name="sign-pulse" required>
-                        </div>
-                        <button type="submit" class="action-btn">Crear Signo</button>
-                    </form>
-                </div>
-        
-                <!-- Formulario para Actualizar Signo (a la izquierda) -->
-                <div style="width: 48%;">
-                    <h3>Actualizar Signo</h3>
-                    <form id="signs-update-form">
-                        <label for="update-sign-id">Seleccionar ID del Signo:</label>
-                        <select id="update-sign-id" required></select>
-        
-                        <div>
-                            <label for="update-sign-note-id">ID Nota:</label>
-                            <input type="number" id="update-sign-note-id" name="update-sign-note-id" required>
-                        </div>
-                        <div>
-                            <label for="update-sign-temperature">Temperatura:</label>
-                            <input type="number" step="0.1" id="update-sign-temperature" name="update-sign-temperature" required>
-                        </div>
-                        <div>
-                            <label for="update-sign-pulse">Pulso:</label>
-                            <input type="text" id="update-sign-pulse" name="update-sign-pulse" required>
-                        </div>
-                        <button id="update-sign-btn" class="action-btn">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div>
-        
-            <!-- Contenedor de Búsqueda y Lista de Signos -->
-            <div style="margin-top: 20px;">
-                <h3>Buscar Signo</h3>
-                <input type="number" id="search-sign-id" placeholder="Ingrese ID del Signo" required>
-                <button id="search-sign-btn" class="action-btn">Buscar Signo</button>
-                <div id="sign-search-output"></div>
-        
-                <h3>Lista de Signos</h3>
-                <table id="signs-table">
-                    <thead>
-                        <tr>
-                            <th>ID Signo</th>
-                            <th>ID Nota</th>
-                            <th>Temperatura</th>
-                            <th>Pulso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-        <!--  -->
-
-        <section id="supplies-patients" style="display: none; margin-top: 20px;"> <!-- Sección Suministros a Pacientes -->
-            <h2>Gestión de Suministros a Pacientes</h2>
-        
-            <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
-            <div id="supplies-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                
-                <!-- Formulario para Crear Suministro a Paciente (a la derecha) -->
-                <div style="width: 48%;">
-                    <h3>Crear Suministro</h3>
-                    <form id="supplies-create-form">
-                        <div>
-                            <label for="supply-cantsup">Cantidad de Suministro:</label>
-                            <input type="number" id="supply-cantsup" name="supply-cantsup" required>
-                        </div>
-                        <div>
-                            <label for="supply-income-id">ID de Ingreso:</label>
-                            <input type="number" id="supply-income-id" name="supply-income-id" required>
-                        </div>
-                        <div>
-                            <label for="supply-med-id">ID de Medicamento:</label>
-                            <input type="number" id="supply-med-id" name="supply-med-id" required>
-                        </div>
-                        <button type="submit" class="action-btn">Crear Suministro</button>
-                    </form>
-                </div>
-        
-                <!-- Formulario para Actualizar Suministro a Paciente (a la izquierda) -->
-                <div style="width: 48%;">
-                    <h3>Actualizar Suministro</h3>
-                    <form id="supplies-update-form">
-                        <label for="update-supply-id">Seleccionar ID del Suministro:</label>
-                        <select id="update-supply-id" required></select>
-        
-                        <div>
-                            <label for="update-supply-cantsup">Cantidad de Suministro:</label>
-                            <input type="number" id="update-supply-cantsup" name="update-supply-cantsup" required>
-                        </div>
-                        <div>
-                            <label for="update-supply-income-id">ID de Ingreso:</label>
-                            <input type="number" id="update-supply-income-id" name="update-supply-income-id" required>
-                        </div>
-                        <div>
-                            <label for="update-supply-med-id">ID de Medicamento:</label>
-                            <input type="number" id="update-supply-med-id" name="update-supply-med-id" required>
-                        </div>
-                        <button id="update-supply-btn" class="action-btn">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div>
-        
-            <!-- Contenedor de Búsqueda y Lista de Suministros -->
-            <div style="margin-top: 20px;">
-                <h3>Buscar Suministro</h3>
-                <input type="number" id="search-supply-id" placeholder="Ingrese ID del Suministro" required>
-                <button id="search-supply-btn" class="action-btn">Buscar Suministro</button>
-                <div id="supply-search-output"></div>
-        
-                <h3>Lista de Suministros a Pacientes</h3>
-                <table id="supplies-table">
-                    <thead>
-                        <tr>
-                            <th>ID Suministro</th>
-                            <th>Cantidad</th>
-                            <th>ID Ingreso</th>
-                            <th>ID Medicamento</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        
-
-    </header>
+      
     <!--   --------------------------------------------------------------                             -->
 
     <script src="./js/login.js"></script>
@@ -1216,17 +2075,9 @@
     <script src="./js/ptrecords.js"></script>
     <script src="./js/signs.js"></script>
     <script src="./js/suppat.js"></script>
+    <script src="./js/folios.js"></script>
+    <script src="./js/nursenote.js"></script>
+    <script src="./js/back.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-</body>
-
+  </body>
 </html>

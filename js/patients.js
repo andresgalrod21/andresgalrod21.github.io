@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const sections = [
             "diagnosticos", "groups", "folios", "headquarters", "incomes", "medications",
             "permissions-groups", "permissions", "staff", "tipdocs", "logs", "score", "users", "patients", "patient-records",
-            "signs", "supplies-patients"
+            "signs", "supplies-patients", "folios", "nurse-note-section"
         ];
         sections.forEach(id => {
             const section = document.getElementById(id);

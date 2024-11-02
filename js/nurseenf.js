@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const ntBtn = document.getElementById('nt-btn');
+    const firstBackButton = document.getElementById('back-button-1');
+    const thirdBackButton = document.getElementById('back-button-3');
 
     if (ntBtn) {
         ntBtn.addEventListener('click', function() {
@@ -16,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Mostrar "notasenf"
             notasEnfSection.style.display = 'block';
+
+            // Ocultar el primer botón y mostrar el tercer botón
+            if (firstBackButton && thirdBackButton) {
+                firstBackButton.style.display = 'none';
+                thirdBackButton.style.display = 'block';
+            }
         });
     }
 });
