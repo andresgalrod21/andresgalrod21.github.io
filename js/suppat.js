@@ -11,18 +11,34 @@ document.addEventListener("DOMContentLoaded", function() {
     const suppliesSection = document.getElementById("supplies-patients");
     const suppliesBtn = document.getElementById("medicamentos-paciente-btn");
 
-    // Función para ocultar todas las secciones
-    function hideAllSections() {
+      // Función para ocultar todas las secciones
+      function hideAllSections() {
         const sections = [
-            "diagnosticos", "groups", "folios", "headquarters", "incomes", "medications",
-            "permissions-groups", "permissions", "staff", "tipdocs", "logs", "score", "users", "patients", "supplies-patients",
-            "signs", "patient-records", "folios", "nurse-note-section"
+          "diagnosticos",
+        "groups",
+        "headquarters",
+        "incomes",
+        "medications",
+        "permissions-groups",
+        "permissions",
+        "specialities",
+        "staff",
+        "tipdocs",
+        "users",
+        "logs",
+        "score",
+        "patients",
+        "patient-records",
+        "signs",
+        "supplies-patients",
+        "folios",
+        "nurse-note-section"
         ];
-        sections.forEach(id => {
-            const section = document.getElementById(id);
-            if (section) section.style.display = "none";
+        sections.forEach((id) => {
+          const section = document.getElementById(id);
+          if (section) section.style.display = "none";
         });
-    }
+      }
 
     // Evento para mostrar solo la sección de suministros a pacientes
     suppliesBtn.addEventListener("click", () => {

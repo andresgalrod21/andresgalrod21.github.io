@@ -9,48 +9,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const headquartersSection = document.getElementById("headquarters"); // Sección de Sedes
     const headquartersBtn = document.getElementById("sedes-btn"); // Botón de Sedes
 
-    // Otras secciones que pueden estar visibles
-    const diagnosSection = document.getElementById("diagnosticos");
-    const groupsSection = document.getElementById("groups");
-    const foliosSection = document.getElementById("folios");
-    const incomesSection = document.getElementById("incomes");
-    const medicationsSection = document.getElementById("medications");
-    const permissionsGroupsSection = document.getElementById("permissions-groups");
-    const permissionsSection = document.getElementById("permissions");
-    const specialitiesSection = document.getElementById("specialities");
-    const staffSection = document.getElementById("staff");
-    const tipdocsSection = document.getElementById("tipdocs");
-    const usersSection = document.getElementById("users");
-    const logsSection = document.getElementById("logs");
-    const scoreSection = document.getElementById("score");
-
-
-
-    // Función para ocultar todas las secciones
-    function hideAllSections() {
-        if (diagnosSection) diagnosSection.style.display = "none";
-        if (groupsSection) groupsSection.style.display = "none";
-        if (foliosSection) foliosSection.style.display = "none";
-        if (incomesSection) incomesSection.style.display = "none";
-        if (medicationsSection) medicationsSection.style.display = "none";
-        if (permissionsGroupsSection) permissionsGroupsSection.style.display = "none";
-        if (permissionsSection) permissionsSection.style.display = "none";
-        if (specialitiesSection) specialitiesSection.style.display = "none";
-        if (staffSection) staffSection.style.display = "none";
-        if (tipdocsSection) tipdocsSection.style.display = "none";
-        if (usersSection) usersSection.style.display = "none";
-        if (logsSection) logsSection.style.display = "none";
-        if (scoreSection) scoreSection.style.display = "none";
-
-        headquartersSection.style.display = "none";
-    }
-
-    // Evento en el botón para mostrar solo la sección de sedes
-    headquartersBtn.addEventListener("click", () => {
-        hideAllSections(); // Oculta todas las secciones
-        headquartersSection.style.display = "block"; // Muestra solo la sección de sedes
-        loadHeadquarters(); // Cargar la lista de sedes
+          // Función para ocultar todas las secciones
+  function hideAllSections() {
+    const sections = [
+      "diagnosticos",
+    "groups",
+    "headquarters",
+    "incomes",
+    "medications",
+    "permissions-groups",
+    "permissions",
+    "specialities",
+    "staff",
+    "tipdocs",
+    "users",
+    "logs",
+    "score",
+    "patients",
+    "patient-records",
+    "signs",
+    "supplies-patients",
+    "folios",
+    "nurse-note-section"
+    ];
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) section.style.display = "none";
     });
+  }
+
+  // Evento para mostrar solo la sección de notas de enfermería
+  headquartersBtn.addEventListener("click", () => {
+    hideAllSections();
+    headquartersSection.style.display = "block";
+    loadHeadquarters();
+  });
 
     // Función para cargar Sedes
     function loadHeadquarters() {

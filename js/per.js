@@ -18,47 +18,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const permissionsSection = document.getElementById("permissions"); // Sección de Permisos
     const permissionsBtn = document.getElementById("per-btn"); // Botón de Permisos
 
-    // Otras secciones que deben ocultarse al ver la sección Permisos
-    const diagnosSection = document.getElementById("diagnosticos");
-    const groupsSection = document.getElementById("groups");
-    const foliosSection = document.getElementById("folios");
-    const headquartersSection = document.getElementById("headquarters");
-    const incomesSection = document.getElementById("incomes");
-    const medicationsSection = document.getElementById("medications");
-    const permissionsGroupsSection = document.getElementById("permissions-groups");
-    const specialitiesSection = document.getElementById("specialities");
-    const staffSection = document.getElementById("staff");
-    const tipdocsSection = document.getElementById("tipdocs");
-    const usersSection = document.getElementById("users");
-    const logsSection = document.getElementById("logs");
-    const scoreSection = document.getElementById("score");
-
-
-    // Función para ocultar todas las secciones
-    function hideAllSections() {
-        if (diagnosSection) diagnosSection.style.display = "none";
-        if (groupsSection) groupsSection.style.display = "none";
-        if (foliosSection) foliosSection.style.display = "none";
-        if (headquartersSection) headquartersSection.style.display = "none";
-        if (incomesSection) incomesSection.style.display = "none";
-        if (medicationsSection) medicationsSection.style.display = "none";
-        if (permissionsGroupsSection) permissionsGroupsSection.style.display = "none";
-        if (specialitiesSection) specialitiesSection.style.display = "none";
-        if (staffSection) staffSection.style.display = "none";
-        if (tipdocsSection) tipdocsSection.style.display = "none";
-        if (usersSection) usersSection.style.display = "none";
-        if (logsSection) logsSection.style.display = "none";
-        if (scoreSection) scoreSection.style.display = "none";
-
-        permissionsSection.style.display = "none";
-    }
-
-    // Evento para mostrar solo la sección de permisos
-    permissionsBtn.addEventListener("click", () => {
-        hideAllSections();
-        permissionsSection.style.display = "block";
-        loadPermissions(); // Cargar lista de permisos
+          // Función para ocultar todas las secciones
+  function hideAllSections() {
+    const sections = [
+      "diagnosticos",
+    "groups",
+    "headquarters",
+    "incomes",
+    "medications",
+    "permissions-groups",
+    "permissions",
+    "specialities",
+    "staff",
+    "tipdocs",
+    "users",
+    "logs",
+    "score",
+    "patients",
+    "patient-records",
+    "signs",
+    "supplies-patients",
+    "folios",
+    "nurse-note-section"
+    ];
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) section.style.display = "none";
     });
+  }
+
+  // Evento para mostrar solo la sección de notas de enfermería
+  permissionsBtn.addEventListener("click", () => {
+    hideAllSections();
+    permissionsSection.style.display = "block";
+    loadPermissions();
+  });
 
     // Función para cargar Permisos
     function loadPermissions() {

@@ -10,18 +10,35 @@ document.addEventListener("DOMContentLoaded", function() {
     const signsSection = document.getElementById("signs");
     const signsBtn = document.getElementById("signos-btn");
 
-    // Función para ocultar todas las secciones
-    function hideAllSections() {
-        const sections = [
-            "diagnosticos", "groups", "folios", "headquarters", "incomes", "medications",
-            "permissions-groups", "permissions", "staff", "tipdocs", "logs", "score", "users", "patients", "patient-records",
-            "signs", "supplies-patients", "nurse-note-section"
-        ];
-        sections.forEach(id => {
-            const section = document.getElementById(id);
-            if (section) section.style.display = "none";
-        });
-    }
+          // Función para ocultar todas las secciones
+  function hideAllSections() {
+    const sections = [
+      "diagnosticos",
+    "groups",
+    "headquarters",
+    "incomes",
+    "medications",
+    "permissions-groups",
+    "permissions",
+    "specialities",
+    "staff",
+    "tipdocs",
+    "users",
+    "logs",
+    "score",
+    "patients",
+    "patient-records",
+    "signs",
+    "supplies-patients",
+    "folios",
+    "nurse-note-section"
+    ];
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) section.style.display = "none";
+    });
+  }
+
 
     // Evento para mostrar solo la sección de signos
     signsBtn.addEventListener("click", () => {

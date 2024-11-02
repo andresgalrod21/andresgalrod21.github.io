@@ -10,25 +10,41 @@ document.addEventListener("DOMContentLoaded", function() {
     const foliosSection = document.getElementById("folios");
     const foliosBtn = document.getElementById("folios-btn");
 
-    // Función para ocultar todas las secciones
-    function hideAllSections() {
+      // Función para ocultar todas las secciones
+      function hideAllSections() {
         const sections = [
-            "diagnosticos", "groups", "folios", "headquarters", "incomes", "medications",
-            "permissions-groups", "permissions", "staff", "tipdocs", "logs", "score", "users", "patients", "supplies-patients",
-            "signs", "nurse-note-section", "patient-records"
+          "diagnosticos",
+        "groups",
+        "headquarters",
+        "incomes",
+        "medications",
+        "permissions-groups",
+        "permissions",
+        "specialities",
+        "staff",
+        "tipdocs",
+        "users",
+        "logs",
+        "score",
+        "patients",
+        "patient-records",
+        "signs",
+        "supplies-patients",
+        "folios",
+        "nurse-note-section"
         ];
-        sections.forEach(id => {
-            const section = document.getElementById(id);
-            if (section) section.style.display = "none";
+        sections.forEach((id) => {
+          const section = document.getElementById(id);
+          if (section) section.style.display = "none";
         });
-    }
-
-    // Evento para mostrar solo la sección de folios
-    foliosBtn.addEventListener("click", () => {
+      }
+    
+      // Evento para mostrar solo la sección de notas de enfermería
+      foliosBtn.addEventListener("click", () => {
         hideAllSections();
         foliosSection.style.display = "block";
         loadFolios();
-    });
+      });
 
     // Función para cargar Folios
     function loadFolios() {

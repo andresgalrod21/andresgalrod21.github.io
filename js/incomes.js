@@ -9,46 +9,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const incomesSection = document.getElementById("incomes"); // Sección de Ingresos
     const incomesBtn = document.getElementById("income-btn"); // Botón de Ingresos
 
-    // Otras secciones que deben ocultarse al ver la sección Ingresos
-    const diagnosSection = document.getElementById("diagnosticos");
-    const groupsSection = document.getElementById("groups");
-    const foliosSection = document.getElementById("folios");
-    const medicationsSection = document.getElementById("medications");
-    const permissionsGroupsSection = document.getElementById("permissions-groups");
-    const permissionsSection = document.getElementById("permissions");
-    const specialitiesSection = document.getElementById("specialities");
-    const staffSection = document.getElementById("staff");
-    const tipdocsSection = document.getElementById("tipdocs");
-    const usersSection = document.getElementById("users");
-    const logsSection = document.getElementById("logs");
-    const scoreSection = document.getElementById("score");
-
-
-    // Función para ocultar todas las secciones
-    function hideAllSections() {
-        if (diagnosSection) diagnosSection.style.display = "none";
-        if (groupsSection) groupsSection.style.display = "none";
-        if (foliosSection) foliosSection.style.display = "none";
-        if (medicationsSection) medicationsSection.style.display = "none";
-        if (permissionsGroupsSection) permissionsGroupsSection.style.display = "none";
-        if (permissionsSection) permissionsSection.style.display = "none";
-        if (specialitiesSection) specialitiesSection.style.display = "none";
-        if (staffSection) staffSection.style.display = "none";
-        if (tipdocsSection) tipdocsSection.style.display = "none";
-        if (usersSection) usersSection.style.display = "none";
-        if (logsSection) logsSection.style.display = "none";
-        if (scoreSection) scoreSection.style.display = "none";
-
-        incomesSection.style.display = "none";
-    }
-
-    // Evento para mostrar solo la sección de ingresos
-    incomesBtn.addEventListener("click", () => {
-        hideAllSections();
-        incomesSection.style.display = "block";
-        loadIncomes(); // Cargar lista de ingresos
+          // Función para ocultar todas las secciones
+  function hideAllSections() {
+    const sections = [
+      "diagnosticos",
+    "groups",
+    "headquarters",
+    "incomes",
+    "medications",
+    "permissions-groups",
+    "permissions",
+    "specialities",
+    "staff",
+    "tipdocs",
+    "users",
+    "logs",
+    "score",
+    "patients",
+    "patient-records",
+    "signs",
+    "supplies-patients",
+    "folios",
+    "nurse-note-section"
+    ];
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) section.style.display = "none";
     });
+  }
 
+  // Evento para mostrar solo la sección de notas de enfermería
+  incomesBtn.addEventListener("click", () => {
+    hideAllSections();
+    incomesSection.style.display = "block";
+    loadIncomes();
+  });
     // Función para cargar Ingresos
     function loadIncomes() {
         fetch('https://nursenotes.somee.com/apiIncomes')
