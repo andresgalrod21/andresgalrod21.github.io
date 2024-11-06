@@ -38,9 +38,9 @@
         </form>
       </section>
                                           
-                                            <!-- <div class="test-button" style="text-align: center; margin-top: 20px;">
-                                                <button id="test-login-btn" class="login-btn">Registrese</button>
-                                            </div> -->
+                                            <div class="crealogin" style="text-align: center; margin-top: 20px;">
+                                                <button id="crea-simple" class="login-btn">Registrese</button>
+                                            </div>
 
       <section id="action-buttons" style="display: none">
         <!-- Asegúrate de que el id esté bien -->
@@ -927,186 +927,121 @@
       <section id="users" style="display: none; margin-top: 20px">
         <!-- Sección Usuarios -->
         <h2>Gestión de Usuarios</h2>
-
+    
         <!-- Contenedor para organizar los formularios de creación y actualización en columnas -->
-        <div
-          id="user-form-container"
-          style="
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-          "
-        >
-          <!-- Formulario para Crear Usuario (a la derecha) -->
-          <div style="width: 48%">
-            <h3>Crear Usuario</h3>
-            <form id="user-create-form">
-              <div>
-                <label for="user-name">Nombre:</label>
-                <input type="text" id="user-name" name="user-name" required />
-              </div>
-              <div>
-                <label for="user-lastname">Apellido:</label>
-                <input
-                  type="text"
-                  id="user-lastname"
-                  name="user-lastname"
-                  required
-                />
-              </div>
-              <div>
-                <label for="user-tipdoc">Tipo Documento:</label>
-                <input
-                  type="text"
-                  id="user-tipdoc"
-                  name="user-tipdoc"
-                  required
-                />
-              </div>
-              <div>
-                <label for="user-numdoc">Número Documento:</label>
-                <input
-                  type="number"
-                  id="user-numdoc"
-                  name="user-numdoc"
-                  required
-                />
-              </div>
-              <div>
-                <label for="user-usr">Usuario:</label>
-                <input type="text" id="user-usr" name="user-usr" required />
-              </div>
-              <div>
-                <label for="user-usrpsw">Contraseña:</label>
-                <input
-                  type="password"
-                  id="user-usrpsw"
-                  name="user-usrpsw"
-                  required
-                />
-              </div>
-              <div>
-                <label for="user-grp-id">ID Grupo:</label>
-                <input
-                  type="number"
-                  id="user-grp-id"
-                  name="user-grp-id"
-                  required
-                />
-              </div>
-              <button type="submit" class="action-btn">Crear Usuario</button>
-            </form>
-          </div>
-
-          <!-- Formulario para Actualizar Usuario (a la izquierda) -->
-          <div style="width: 48%">
-            <h3>Actualizar Usuario</h3>
-            <form id="user-update-form">
-              <label for="update-user-id">Seleccionar ID del Usuario:</label>
-              <select id="update-user-id" required></select>
-
-              <div>
-                <label for="update-user-name">Nombre:</label>
-                <input
-                  type="text"
-                  id="update-user-name"
-                  name="update-user-name"
-                  required
-                />
-              </div>
-              <div>
-                <label for="update-user-lastname">Apellido:</label>
-                <input
-                  type="text"
-                  id="update-user-lastname"
-                  name="update-user-lastname"
-                  required
-                />
-              </div>
-              <div>
-                <label for="update-user-tipdoc">Tipo Documento:</label>
-                <input
-                  type="text"
-                  id="update-user-tipdoc"
-                  name="update-user-tipdoc"
-                  required
-                />
-              </div>
-              <div>
-                <label for="update-user-numdoc">Número Documento:</label>
-                <input
-                  type="number"
-                  id="update-user-numdoc"
-                  name="update-user-numdoc"
-                  required
-                />
-              </div>
-              <div>
-                <label for="update-user-usr">Usuario:</label>
-                <input
-                  type="text"
-                  id="update-user-usr"
-                  name="update-user-usr"
-                  required
-                />
-              </div>
-              <div>
-                <label for="update-user-usrpsw">Contraseña:</label>
-                <input
-                  type="password"
-                  id="update-user-usrpsw"
-                  name="update-user-usrpsw"
-                  required
-                />
-              </div>
-              <div>
-                <label for="update-user-grp-id">ID Grupo:</label>
-                <input
-                  type="number"
-                  id="update-user-grp-id"
-                  name="update-user-grp-id"
-                  required
-                />
-              </div>
-              <button id="update-user-btn" class="action-btn">
-                Guardar Cambios
-              </button>
-            </form>
-          </div>
+        <div id="user-form-container" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            
+            <!-- Formulario para Crear Usuario (a la derecha) -->
+            <div style="width: 48%">
+                <h3>Crear Usuario</h3>
+                <form id="user-create-form">
+                    <div>
+                        <label for="user-name">Nombre:</label>
+                        <input type="text" id="user-name" name="user-name" required />
+                    </div>
+                    <div>
+                        <label for="user-lastname">Apellido:</label>
+                        <input type="text" id="user-lastname" name="user-lastname" required />
+                    </div>
+                    <div>
+                        <label for="user-tipdoc">Tipo Documento:</label>
+                        <input type="text" id="user-tipdoc" name="user-tipdoc" required />
+                    </div>
+                    <div>
+                        <label for="user-numdoc">Número Documento:</label>
+                        <input type="number" id="user-numdoc" name="user-numdoc" required />
+                    </div>
+                    <div>
+                        <label for="user-usr">Usuario:</label>
+                        <input type="text" id="user-usr" name="user-usr" required />
+                    </div>
+                    <div>
+                        <label for="user-usrpsw">Contraseña:</label>
+                        <input type="password" id="user-usrpsw" name="user-usrpsw" required />
+                    </div>
+                    <div>
+                        <label for="user-grp-id">ID Grupo:</label>
+                        <input type="number" id="user-grp-id" name="user-grp-id" required />
+                    </div>
+                    <div>
+                        <label for="user-email">Correo:</label>
+                        <input type="email" id="user-email" name="user-email" required />
+                    </div>
+                    <button type="submit" class="action-btn">Crear Usuario</button>
+                </form>
+            </div>
+    
+            <!-- Formulario para Actualizar Usuario (a la izquierda) -->
+            <div style="width: 48%">
+                <h3>Actualizar Usuario</h3>
+                <form id="user-update-form">
+                    <label for="update-user-id">Seleccionar ID del Usuario:</label>
+                    <select id="update-user-id" required></select>
+    
+                    <div>
+                        <label for="update-user-name">Nombre:</label>
+                        <input type="text" id="update-user-name" name="update-user-name" required />
+                    </div>
+                    <div>
+                        <label for="update-user-lastname">Apellido:</label>
+                        <input type="text" id="update-user-lastname" name="update-user-lastname" required />
+                    </div>
+                    <div>
+                        <label for="update-user-tipdoc">Tipo Documento:</label>
+                        <input type="text" id="update-user-tipdoc" name="update-user-tipdoc" required />
+                    </div>
+                    <div>
+                        <label for="update-user-numdoc">Número Documento:</label>
+                        <input type="number" id="update-user-numdoc" name="update-user-numdoc" required />
+                    </div>
+                    <div>
+                        <label for="update-user-usr">Usuario:</label>
+                        <input type="text" id="update-user-usr" name="update-user-usr" required />
+                    </div>
+                    <div>
+                        <label for="update-user-usrpsw">Contraseña:</label>
+                        <input type="password" id="update-user-usrpsw" name="update-user-usrpsw" required />
+                    </div>
+                    <div>
+                        <label for="update-user-grp-id">ID Grupo:</label>
+                        <input type="number" id="update-user-grp-id" name="update-user-grp-id" required />
+                    </div>
+                    <div>
+                        <label for="update-user-email">Correo:</label>
+                        <input type="email" id="update-user-email" name="update-user-email" required />
+                    </div>
+                    <button id="update-user-btn" class="action-btn">Guardar Cambios</button>
+                </form>
+            </div>
         </div>
-
+    
         <!-- Contenedor de Búsqueda y Lista de Usuarios -->
         <div style="margin-top: 20px">
-          <h3>Buscar Usuario</h3>
-          <input
-            type="number"
-            id="search-user-id"
-            placeholder="Ingrese ID del Usuario"
-            required
-          />
-          <button id="search-user-btn" class="action-btn">
-            Buscar Usuario
-          </button>
-          <div id="user-search-output"></div>
-
-          <h3>Lista de Usuarios</h3>
-          <table id="users-table">
-            <thead>
-              <tr>
-                <th>ID Usuario</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Tipo Documento</th>
-                <th>Número Documento</th>
-                <th>Usuario</th>
-                <th>ID Grupo</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+            <h3>Buscar Usuario</h3>
+            <input type="number" id="search-user-id" placeholder="Ingrese ID del Usuario" required />
+            <button id="search-user-btn" class="action-btn">Buscar Usuario</button>
+            <div id="user-search-output"></div>
+    
+            <h3>Lista de Usuarios</h3>
+            <table id="users-table">
+                <thead>
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Tipo Documento</th>
+                        <th>Número Documento</th>
+                        <th>Usuario</th>
+                        <th>ID Grupo</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
-      </section>
+    </section>
+    
 
       <!--  -->
 
@@ -1122,7 +1057,7 @@
               <th>ID Log</th>
               <th>ID Usuario</th>
               <th>Fecha de Modificación</th>
-              <th>Usuario que Modificó</th>
+              <th>Accion realizada</th>
             </tr>
           </thead>
           <tbody>
@@ -2050,6 +1985,48 @@
         Regresar
     </button>
     
+
+    <section id="simple-register" style="display: none; margin-top: 20px;">
+      <h2>Registro Simplificado</h2>
+      <form id="simple-register-form">
+          <div>
+              <label for="simple-user-name">Nombre:</label>
+              <input type="text" id="simple-user-name" name="simple-user-name" required />
+          </div>
+          <div>
+              <label for="simple-user-lastname">Apellido:</label>
+              <input type="text" id="simple-user-lastname" name="simple-user-lastname" required />
+          </div>
+          <div>
+              <label for="simple-user-email">Correo:</label>
+              <input type="email" id="simple-user-email" name="simple-user-email" required />
+          </div>
+          <div>
+              <label for="simple-user-usr">Usuario:</label>
+              <input type="text" id="simple-user-usr" name="simple-user-usr" required />
+          </div>
+          <div>
+              <label for="simple-user-password">Contraseña:</label>
+              <input type="password" id="simple-user-password" name="simple-user-password" required />
+          </div>
+          <div>
+              <label for="simple-user-confirm-password">Confirmar Contraseña:</label>
+              <input type="password" id="simple-user-confirm-password" name="simple-user-confirm-password" required />
+          </div>
+          <button type="submit" class="action-btn">Registrar Usuario</button>
+      </form>
+  </section>
+  
+  
+  <section id="data-acceptance-section" style="display: none; text-align: center; margin-top: 20px;">
+    <h2>Aceptación de Uso y Tratamiento de Datos</h2>
+    <p>
+        Al utilizar este servicio, usted acepta que sus datos personales serán tratados conforme a nuestra 
+        <a href="#" target="_blank">Política de Privacidad</a>. La información que recolectamos se usará para brindarle una mejor experiencia y está protegida bajo nuestras normas de confidencialidad.
+    </p>
+    <button id="accept-data-usage" class="acceptance-btn">Aceptar</button>
+</section>
+
     
 
       
@@ -2079,6 +2056,8 @@
     <script src="./js/folios.js"></script>
     <script src="./js/nursenote.js"></script>
     <script src="./js/back.js"></script>
+    <script src="./js/crearusr.js"></script>
+
 
   </body>
 </html>

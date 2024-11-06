@@ -21,7 +21,8 @@
                 };
 
                 // Realiza la solicitud fetch a la API del backend
-                fetch('https://nursenotes.somee.com/api/Auth/login', { // Usa http o https según el backend
+                // //fetch('https://nursenotes.somee.com/api/Auth/login',
+                    fetch('https://nursenotes.somee.com/api/Auth/login', { // Usa http o https según el backend
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -53,6 +54,17 @@
                     console.error('Error en la solicitud:', error);
                     alert(`Error en la solicitud: ${error.message}.`);
                 });
+
+
+
+
+
+
+
+
+
+
+                
             });
         }
     });

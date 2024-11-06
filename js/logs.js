@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para cargar Logs de Usuario
     function loadLogs() {
-        fetch("https://nursenotes.somee.com/apiUsersLogs")
+        //fetch("https://nursenotes.somee.com/apiUsersLogs")
+        fetch("https://nursenotes.somee.com/api/UsersLogs")
             .then((response) => response.json())
             .then((data) => {
                 logsTable.innerHTML = ""; // Limpiar tabla

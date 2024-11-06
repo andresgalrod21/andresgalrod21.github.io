@@ -159,7 +159,7 @@ body{
 /*----------------------------------------*/
 #diagnosticos, #groups, #headquarters, #incomes, #medications, #permissions-groups,
 #permissions, #specialities, #staff, #tipdocs, #users, #logs, #score, #patients,
-#patient-records, #signs, #supplies-patients, #folios, #nurse-note-section {
+#patient-records, #signs, #supplies-patients, #folios, #nurse-note-section, #simple-register, #data-acceptance-section {
     position: absolute;
     top: 45%;
     left: 60%;

@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ntBtn = document.getElementById('nt-btn');
     const firstBackButton = document.getElementById('back-button-1');
     const thirdBackButton = document.getElementById('back-button-3');
+    
 
     if (ntBtn) {
         ntBtn.addEventListener('click', function() {
@@ -10,11 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const heroContainer = document.querySelector('.hero_container');
             const loginSection = document.getElementById('login-section');
             const actionButtons = document.getElementById('action-buttons');
+            const creasimple = document.getElementById('crea-simple');
+
 
             // Ocultar secciones
             heroContainer.style.display = 'none';
             loginSection.style.display = 'none';
             actionButtons.style.display = 'none';
+            creasimple.style.display = "none";
+
             
             // Mostrar "notasenf"
             notasEnfSection.style.display = 'block';
