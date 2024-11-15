@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
     // Función para cargar Grupos
     function loadGroups() {
-        fetch('http://nursenotes.somee.com/apiGroups') // Cambia esta URL a la API de tu backend
+        fetch('https://nursenotes.somee.com/apiGroups') // Cambia esta URL a la API de tu backend
             .then(response => response.json())
             .then(data => {
                 groupsTable.innerHTML = ""; // Limpiar tabla
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     searchGroupBtn.addEventListener("click", () => {
         const grP_ID = document.getElementById("search-group-id").value;
 
-        fetch(`http://nursenotes.somee.com/apiGroups/${grP_ID}`)
+        fetch(`https://nursenotes.somee.com/apiGroups/${grP_ID}`)
             .then(response => response.json())
             .then(data => {
                 if (data) {
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const grP_ID = updateGroupIDSelect.value;
         const grpdsc = document.getElementById("update-group-desc").value;
     
-        fetch(`http://nursenotes.somee.com/apiGroups/${grP_ID}`, {
+        fetch(`https://nursenotes.somee.com/apiGroups/${grP_ID}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
