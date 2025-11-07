@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crear usuario • HelpDeskCloud</title>
+    <link rel="stylesheet" href="assets/styles.css?v=3" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Crear usuario</h1>
+      <p id="adminInfo">Verificando sesión...</p>
+
+      <form id="createUserForm">
+        <label for="email">Email</label>
+        <input id="email" type="email" required />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" required />
+
+        <label for="role">Rol</label>
+        <select id="role">
+          <option value="user" selected>usuario</option>
+          <option value="admin">admin</option>
+        </select>
+
+        <button type="submit" class="btn">Crear</button>
+      </form>
+
+      <div class="actions">
+        <a href="#" class="link link-back">Volver</a>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/admin_create_user.js"></script>
+  </body>
+  </html>

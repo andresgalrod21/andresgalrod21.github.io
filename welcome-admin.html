@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bienvenido Admin • HelpDeskCloud</title>
+    <link rel="stylesheet" href="assets/styles.css?v=3" />
+  </head>
+  <body>
+    <main class="container wide">
+      <div class="udec-banner">
+        <div class="udec-banner-left">
+          <img class="udec-banner-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Escudo_udec.png?20170606164645" alt="Escudo UDEC" />
+          <div class="udec-banner-text">
+            <div class="line1">UDEC CHIA</div>
+            <div class="line2">HELPDESK</div>
+          </div>
+        </div>
+      </div>
+      <p id="userInfo" style="display:none"></p>
+
+      <div id="topMenu" class="actions" style="margin-bottom: 16px; gap: 8px; display: flex;">
+        <button id="btnUsers" class="btn">Usuarios</button>
+        <button id="btnTickets" class="btn btn-secondary">Casos</button>
+      </div>
+
+      <section id="sectionUsers" style="display:none;">
+        <h2>Gestión de usuarios</h2>
+        <div class="toolbar" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: end; flex-wrap: wrap; justify-content: space-between;">
+          <div class="toolbar-left" style="display: flex; gap: 8px; align-items: end; flex-wrap: wrap;">
+            <div>
+              <label for="searchUserId">ID</label>
+              <input id="searchUserId" type="number" min="1" />
+            </div>
+            <div>
+              <label for="searchUserEmail">Correo</label>
+              <input id="searchUserEmail" type="text" />
+            </div>
+            <div>
+              <button id="searchUsers" class="btn">Buscar</button>
+              <button id="resetUsers" class="btn btn-secondary">Limpiar</button>
+            </div>
+          </div>
+          <div class="toolbar-right">
+            <button id="createUser" class="btn">Crear usuario</button>
+            <button id="editUser" class="btn btn-secondary">Modificar</button>
+          </div>
+        </div>
+        <div id="usersPanel">
+          <div class="scrollbox">
+          <table class="table" id="usersTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- filas cargadas dinámicamente -->
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="actions" style="margin-top: 8px; justify-content: flex-end;">
+          <a href="#" id="backUsers" class="link link-back">Volver al menú</a>
+        </div>
+      </section>
+
+      <section id="sectionTickets" style="display:none;">
+        <h2>Todos los tickets</h2>
+        <div class="toolbar" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: end; flex-wrap: wrap; justify-content: space-between;">
+          <div class="toolbar-left" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            <label style="display:flex; align-items:center; gap:6px;">
+              <input id="filterMyTickets" type="checkbox" />
+              Mostrar solo mis tickets
+            </label>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <label for="filterStatus">Estado</label>
+              <select id="filterStatus">
+                <option value="">Todos</option>
+                <option value="open">open</option>
+                <option value="in_progress">in_progress</option>
+                <option value="closed">closed</option>
+              </select>
+            </div>
+          </div>
+          <div class="toolbar-right" style="display:flex; gap:8px;">
+            <button id="createTicketAdmin" class="btn">Crear ticket</button>
+          </div>
+        </div>
+        <div id="ticketsPanel">
+          <table class="table" id="ticketsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Estado</th>
+                <th>Prioridad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- filas cargadas dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+        <div class="actions" style="margin-top: 8px; justify-content: flex-end;">
+          <a href="#" id="backTickets" class="link link-back">Volver al menú</a>
+        </div>
+      </section>
+
+      <!-- Modal para crear ticket (admin) -->
+      <div id="modalCreateTicketAdmin" class="modal-overlay">
+        <div class="modal">
+          <h3>Crear ticket</h3>
+          <form id="modalCreateTicketAdminForm">
+            <label for="modalTicketTitle">Título</label>
+            <input id="modalTicketTitle" type="text" required />
+
+            <label for="modalTicketDesc">Descripción</label>
+            <textarea id="modalTicketDesc" rows="4" required></textarea>
+
+            <label for="modalTicketPriority">Prioridad</label>
+            <select id="modalTicketPriority">
+              <option value="low">Baja</option>
+              <option value="normal" selected>Normal</option>
+              <option value="high">Alta</option>
+              <option value="urgent">Urgente</option>
+            </select>
+          </form>
+          <div class="actions">
+            <button id="modalCreateTicketCancel" class="btn btn-secondary">Cancelar</button>
+            <button id="modalCreateTicketOk" class="btn">Crear</button>
+          </div>
+        </div>
+      </div>
+
+      
+
+      <!-- Modal de confirmación genérico -->
+      <div id="modalConfirm" class="modal-overlay">
+        <div class="modal">
+          <h3 id="modalConfirmTitle">Confirmación</h3>
+          <div id="modalConfirmBody">¿Está seguro?</div>
+          <div class="actions">
+            <button id="modalCancel" class="btn btn-secondary">Cancelar</button>
+            <button id="modalOk" class="btn btn-danger">Confirmar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal para creación de usuario -->
+      <div id="modalCreateUser" class="modal-overlay">
+        <div class="modal">
+          <h3>Crear usuario</h3>
+          <form id="modalCreateUserForm">
+            <label for="modalUserEmail">Email</label>
+            <input id="modalUserEmail" type="email" required />
+
+            <label for="modalUserPassword">Password</label>
+            <input id="modalUserPassword" type="password" required />
+
+            <label for="modalUserRole">Rol</label>
+            <select id="modalUserRole">
+              <option value="user" selected>usuario</option>
+              <option value="admin">admin</option>
+            </select>
+          </form>
+          <div class="actions">
+            <button id="modalCreateCancel" class="btn btn-secondary">Cancelar</button>
+            <button id="modalCreateOk" class="btn">Crear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal para modificar contraseña de usuario -->
+      <div id="modalEditUser" class="modal-overlay">
+        <div class="modal">
+          <h3>Modificar usuario</h3>
+          <form id="modalEditUserForm">
+            <label for="modalEditUserId">ID de usuario</label>
+            <input id="modalEditUserId" type="number" min="1" required />
+
+            <label for="modalEditUserPassword">Nueva contraseña</label>
+            <input id="modalEditUserPassword" type="password" required />
+          </form>
+          <div class="actions">
+            <button id="modalEditCancel" class="btn btn-secondary">Cancelar</button>
+            <button id="modalEditOk" class="btn">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+  </html>

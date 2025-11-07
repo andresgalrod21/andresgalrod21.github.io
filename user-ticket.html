@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Detalle de Ticket • Usuario</title>
+    <link rel="stylesheet" href="assets/styles.css?v=4" />
+  </head>
+  <body>
+    <main class="container wide">
+      <div class="udec-banner">
+        <div class="udec-banner-left">
+          <img class="udec-banner-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Escudo_udec.png?20170606164645" alt="Escudo UDEC" />
+          <div class="udec-banner-text">
+            <div class="line1">UDEC CHIA</div>
+            <div class="line2">HELPDESK</div>
+          </div>
+        </div>
+      </div>
+      <h1>Detalle de ticket</h1>
+      <p id="ticketHeader">Cargando ticket...</p>
+
+      <section>
+        <h2>Información</h2>
+        <div id="ticketInfo">
+          <!-- Datos del ticket -->
+        </div>
+      </section>
+
+      <section>
+        <h2>Comentarios</h2>
+        <div id="messagesList" class="messages-scrollbox">
+          <!-- Mensajes cargados dinámicamente -->
+        </div>
+        <form id="commentForm" style="margin-top: 12px;">
+          <label for="commentBody">Nuevo comentario</label>
+          <textarea id="commentBody" rows="3" required></textarea>
+          <button type="submit" class="btn">Agregar</button>
+        </form>
+      </section>
+
+      <div class="actions">
+        <a href="welcome-user.html" class="link">Volver a mis tickets</a>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/user_ticket.js"></script>
+  </body>
+</html>

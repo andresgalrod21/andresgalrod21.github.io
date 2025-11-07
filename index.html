@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login • HelpDeskCloud</title>
+    <link rel="stylesheet" href="assets/styles.css?v=3" />
+  </head>
+  <body class="login-page">
+    <main class="container">
+      <img class="login-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Escudo_udec.png?20170606164645" alt="Escudo de la Universidad de Cundinamarca" />
+      <h1>HelpDeskCloud</h1>
+      <p class="subtitle">Accede o regístrate para continuar</p>
+
+      <!-- API URL oculta: se define internamente en js/config.js -->
+
+      <section class="tabs">
+        <button id="tabLogin" class="tab active">Login</button>
+        <button id="tabRegister" class="tab">Registro</button>
+      </section>
+
+      <section id="loginForm" class="panel active">
+        <form id="formLogin">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" type="email" required />
+          <label for="loginPassword">Password</label>
+          <div class="password-wrapper">
+            <input id="loginPassword" type="password" required />
+            <button type="button" id="loginPasswordToggle" class="password-toggle" aria-label="Mostrar contraseña">👁</button>
+          </div>
+          <button type="submit">Entrar</button>
+        </form>
+      </section>
+
+      <section id="registerForm" class="panel">
+        <form id="formRegister">
+          <label for="regEmail">Email</label>
+          <input id="regEmail" type="email" required />
+          <label for="regPassword">Password</label>
+          <div class="password-wrapper">
+            <input id="regPassword" type="password" required />
+            <button type="button" id="regPasswordToggle" class="password-toggle" aria-label="Mostrar contraseña">👁</button>
+          </div>
+          <label for="regPassword2">Confirmar contraseña</label>
+          <div class="password-wrapper">
+            <input id="regPassword2" type="password" required />
+            <button type="button" id="regPassword2Toggle" class="password-toggle" aria-label="Mostrar contraseña">👁</button>
+          </div>
+          <button type="submit">Crear cuenta</button>
+        </form>
+      </section>
+
+      <div id="msg" class="msg" aria-live="polite"></div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+  </html>

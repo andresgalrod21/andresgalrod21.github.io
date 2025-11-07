@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bienvenido Usuario • HelpDeskCloud</title>
+    <link rel="stylesheet" href="assets/styles.css?v=3" />
+  </head>
+  <body>
+    <main class="container wide">
+      <div class="udec-banner">
+        <div class="udec-banner-left">
+          <img class="udec-banner-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Escudo_udec.png?20170606164645" alt="Escudo UDEC" />
+          <div class="udec-banner-text">
+            <div class="line1">UDEC CHIA</div>
+            <div class="line2">HELPDESK</div>
+          </div>
+        </div>
+      </div>
+      <p id="userInfo" style="display:none"></p>
+
+      <section>
+        <h2>Crear nuevo ticket</h2>
+        <form id="createTicketForm">
+          <label for="ticketTitle">Título</label>
+          <input id="ticketTitle" type="text" required />
+          <label for="ticketDesc">Descripción</label>
+          <textarea id="ticketDesc" rows="4" required></textarea>
+          <label for="ticketPriority">Prioridad</label>
+          <select id="ticketPriority">
+            <option value="low">Baja</option>
+            <option value="normal" selected>Normal</option>
+            <option value="high">Alta</option>
+            <option value="urgent">Urgente</option>
+          </select>
+          <button type="submit" class="btn">Crear</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Mis tickets</h2>
+        <div class="toolbar" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <label for="userFilterStatus">Estado</label>
+          <select id="userFilterStatus">
+            <option value="">Todos</option>
+            <option value="open">open</option>
+            <option value="in_progress">in_progress</option>
+            <option value="closed">closed</option>
+          </select>
+        </div>
+        <div id="ticketsPanel">
+          <table class="table" id="userTicketsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Estado</th>
+                <th>Prioridad</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- filas cargadas dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="actions">
+        <a href="#" class="link link-back">Volver</a>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/user.js"></script>
+  </body>
+  </html>
