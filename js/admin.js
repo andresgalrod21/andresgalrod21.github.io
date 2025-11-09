@@ -283,6 +283,7 @@
     const btnUsers = document.getElementById('btnUsers');
     const btnTickets = document.getElementById('btnTickets');
     const btnClosedTickets = document.getElementById('btnClosedTickets');
+    const btnOpenTickets = document.getElementById('btnOpenTickets');
     const topMenu = document.getElementById('topMenu');
     const usersSec = document.getElementById('sectionUsers');
     const ticketsSec = document.getElementById('sectionTickets');
@@ -323,6 +324,20 @@
         showClosedOnly = true;
         const titleEl = ticketsSec?.querySelector('h2');
         if (titleEl) titleEl.textContent = 'Tickets cerrados';
+        await loadTickets();
+        ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        applyTicketsFilters();
+      });
+    }
+
+    if (btnOpenTickets) {
+      btnOpenTickets.addEventListener('click', async () => {
+        if (usersSec) usersSec.style.display = 'none';
+        if (ticketsSec) ticketsSec.style.display = 'block';
+        if (topMenu) topMenu.style.display = 'none';
+        showClosedOnly = false;
+        const titleEl = ticketsSec?.querySelector('h2');
+        if (titleEl) titleEl.textContent = 'Tickets abiertos';
         await loadTickets();
         ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         applyTicketsFilters();
