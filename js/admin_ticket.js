@@ -150,6 +150,23 @@
         alert(e.message || 'Error al agregar comentario');
       }
     });
+
+    const refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', async () => {
+        try {
+          const ticket = await findTicket(ticketId);
+          if (ticket) {
+            const userEmail = await getUserEmailById(ticket.user_id);
+            renderTicket(ticket, userEmail);
+          }
+          const msgs = await listMessages(ticketId);
+          await renderMessages(msgs);
+        } catch (e) {
+          alert(e.message || 'Error al actualizar información');
+        }
+      });
+    }
   }
 
   window.addEventListener('DOMContentLoaded', async () => {

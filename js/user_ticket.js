@@ -114,6 +114,22 @@
         alert(e.message || 'Error al agregar comentario');
       }
     });
+
+    const refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', async () => {
+        try {
+          const ticket = await findTicket(ticketId);
+          if (ticket) {
+            renderTicket(ticket);
+          }
+          const msgs = await listMessages(ticketId);
+          renderMessages(msgs);
+        } catch (e) {
+          alert(e.message || 'Error al actualizar información');
+        }
+      });
+    }
   }
 
   window.addEventListener('DOMContentLoaded', async () => {
