@@ -10,6 +10,7 @@
   let usersCache = [];
   let ticketsCache = [];
   let currentUserId = null;
+  let showClosedOnly = false; // controla vista: abiertos por defecto, cerrados vía botón
 
   // Función global para aplicar filtros de tickets (se usa en múltiples flujos)
   function applyTicketsFilters() {
@@ -17,6 +18,8 @@
       const filterMyTicketsEl = document.getElementById('filterMyTickets');
       const filterStatusEl = document.getElementById('filterStatus');
       let list = ticketsCache.slice();
+      // aplicar modo cerrados/abiertos
+      list = list.filter(t => showClosedOnly ? t.status === 'closed' : t.status !== 'closed');
       if (filterMyTicketsEl?.checked && currentUserId) {
         list = list.filter(t => t.user_id === currentUserId);
       }
@@ -278,6 +281,7 @@
     // Navegación y visibilidad de secciones
     const btnUsers = document.getElementById('btnUsers');
     const btnTickets = document.getElementById('btnTickets');
+    const btnClosedTickets = document.getElementById('btnClosedTickets');
     const topMenu = document.getElementById('topMenu');
     const usersSec = document.getElementById('sectionUsers');
     const ticketsSec = document.getElementById('sectionTickets');
@@ -301,6 +305,23 @@
         if (usersSec) usersSec.style.display = 'none';
         if (ticketsSec) ticketsSec.style.display = 'block';
         if (topMenu) topMenu.style.display = 'none';
+        showClosedOnly = false;
+        const titleEl = ticketsSec?.querySelector('h2');
+        if (titleEl) titleEl.textContent = 'Tickets abiertos';
+        await loadTickets();
+        ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        applyTicketsFilters();
+      });
+    }
+
+    if (btnClosedTickets) {
+      btnClosedTickets.addEventListener('click', async () => {
+        if (usersSec) usersSec.style.display = 'none';
+        if (ticketsSec) ticketsSec.style.display = 'block';
+        if (topMenu) topMenu.style.display = 'none';
+        showClosedOnly = true;
+        const titleEl = ticketsSec?.querySelector('h2');
+        if (titleEl) titleEl.textContent = 'Tickets cerrados';
         await loadTickets();
         ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         applyTicketsFilters();
@@ -309,6 +330,8 @@
 
     function applyTicketsFilters() {
       let list = ticketsCache.slice();
+      // aplicar modo cerrados/abiertos
+      list = list.filter(t => showClosedOnly ? t.status === 'closed' : t.status !== 'closed');
       if (filterMyTickets?.checked && currentUserId) {
         list = list.filter(t => t.user_id === currentUserId);
       }
@@ -491,6 +514,9 @@
         usersSec && (usersSec.style.display = 'none');
         ticketsSec.style.display = 'block';
         topMenu && (topMenu.style.display = 'none');
+        showClosedOnly = false; // por defecto abrir tickets abiertos
+        const titleEl = ticketsSec?.querySelector('h2');
+        if (titleEl) titleEl.textContent = 'Tickets abiertos';
         await loadTickets();
         applyTicketsFilters();
         ticketsSec.scrollIntoView({ behavior: 'smooth', block: 'start' });

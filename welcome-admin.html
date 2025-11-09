@@ -69,7 +69,7 @@
       </section>
 
       <section id="sectionTickets" style="display:none;">
-        <h2>Todos los tickets</h2>
+        <h2>Tickets abiertos</h2>
         <div class="toolbar" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: end; flex-wrap: wrap; justify-content: space-between;">
           <div class="toolbar-left" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
             <label style="display:flex; align-items:center; gap:6px;">
@@ -82,12 +82,12 @@
                 <option value="">Todos</option>
                 <option value="open">open</option>
                 <option value="in_progress">in_progress</option>
-                <option value="closed">closed</option>
               </select>
             </div>
           </div>
           <div class="toolbar-right" style="display:flex; gap:8px;">
             <button id="createTicketAdmin" class="btn">Crear ticket</button>
+            <button id="btnClosedTickets" class="btn btn-secondary">Tickets cerrados</button>
           </div>
         </div>
         <div id="ticketsPanel">
