@@ -307,12 +307,7 @@
         if (usersSec) usersSec.style.display = 'none';
         if (ticketsSec) ticketsSec.style.display = 'block';
         if (topMenu) topMenu.style.display = 'none';
-        showClosedOnly = false;
-        const titleEl = ticketsSec?.querySelector('h2');
-        if (titleEl) titleEl.textContent = 'Tickets abiertos';
-        await loadTickets();
-        ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        applyTicketsFilters();
+        await setTicketsMode(false);
       });
     }
 
@@ -321,12 +316,7 @@
         if (usersSec) usersSec.style.display = 'none';
         if (ticketsSec) ticketsSec.style.display = 'block';
         if (topMenu) topMenu.style.display = 'none';
-        showClosedOnly = true;
-        const titleEl = ticketsSec?.querySelector('h2');
-        if (titleEl) titleEl.textContent = 'Tickets cerrados';
-        await loadTickets();
-        ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        applyTicketsFilters();
+        await setTicketsMode(true);
       });
     }
 
@@ -335,12 +325,7 @@
         if (usersSec) usersSec.style.display = 'none';
         if (ticketsSec) ticketsSec.style.display = 'block';
         if (topMenu) topMenu.style.display = 'none';
-        showClosedOnly = false;
-        const titleEl = ticketsSec?.querySelector('h2');
-        if (titleEl) titleEl.textContent = 'Tickets abiertos';
-        await loadTickets();
-        ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        applyTicketsFilters();
+        await setTicketsMode(false);
       });
     }
 
@@ -530,12 +515,7 @@
         usersSec && (usersSec.style.display = 'none');
         ticketsSec.style.display = 'block';
         topMenu && (topMenu.style.display = 'none');
-        showClosedOnly = false; // por defecto abrir tickets abiertos
-        const titleEl = ticketsSec?.querySelector('h2');
-        if (titleEl) titleEl.textContent = 'Tickets abiertos';
-        await loadTickets();
-        applyTicketsFilters();
-        ticketsSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        await setTicketsMode(false); // por defecto abrir tickets abiertos
       }
     } catch (e) {
       alert('Error de autenticación: ' + e.message);
@@ -543,3 +523,17 @@
     }
   });
 })();
+    // Helper para alternar entre modo abiertos/cerrados y refrescar lista
+    async function setTicketsMode(isClosed) {
+      showClosedOnly = !!isClosed;
+      const titleEl = ticketsSec?.querySelector('h2');
+      if (titleEl) titleEl.textContent = isClosed ? 'Tickets cerrados' : 'Tickets abiertos';
+      // Mostrar/ocultar botones según modo
+      if (btnClosedTickets) btnClosedTickets.style.display = isClosed ? 'none' : '';
+      if (btnOpenTickets) btnOpenTickets.style.display = isClosed ? '' : 'none';
+      // Reset del filtro de estado para evitar combinaciones vacías
+      if (filterStatus) filterStatus.value = '';
+      await loadTickets();
+      ticketsSec?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      applyTicketsFilters();
+    }
