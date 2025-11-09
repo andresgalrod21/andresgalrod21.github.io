@@ -140,7 +140,8 @@
       if (!res.ok) throw new Error(await res.text());
       ticketsCache = await res.json();
       tbody.innerHTML = '';
-      renderTickets(ticketsCache);
+      // Siempre renderizar según los filtros activos (abiertos/cerrados, míos, estado)
+      applyTicketsFilters();
     } catch (e) {
       tbody.innerHTML = `<tr><td colspan="5">Error: ${e.message}</td></tr>`;
     }
