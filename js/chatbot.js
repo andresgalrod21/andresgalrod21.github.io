@@ -81,13 +81,14 @@
     const opt = $('chatbotOptions');
     if (!opt) return;
     opt.innerHTML = '';
-    FAQS.forEach((f, i) => {
+    const items = [...FAQS, { q: 'Mi duda no está en la lista', a: 'He creado una plantilla para ayudarte a abrir un caso.', keys: ['otra', 'duda', 'lista'] }];
+    items.forEach((f, i) => {
       const b = document.createElement('button');
       b.className = 'btn btn-secondary';
       b.type = 'button';
       b.dataset.index = String(i);
       b.textContent = `${i + 1}. ${f.q}`;
-      b.addEventListener('click', () => handleOption(i));
+      b.addEventListener('click', () => handleOption(i, items));
       opt.appendChild(b);
     });
   }
@@ -98,9 +99,7 @@
     modal.style.display = 'block';
     const box = $('chatbotMessages');
     if (box) box.innerHTML = '';
-    appendMessage('bot', 'Hola 👋 Soy tu asistente. Selecciona una opción por número:', true);
-    const suggestions = FAQS.map((f, i) => `${i + 1}. ${f.q}`).join('<br/>');
-    appendMessage('bot', suggestions, true);
+    appendMessage('bot', 'Hola 👋 Soy tu asistente. Selecciona una opción por número:');
     renderOptions();
   }
 
@@ -109,14 +108,22 @@
     if (modal) modal.style.display = 'none';
   }
 
-  function handleOption(index) {
-    const faq = FAQS[index];
+  function handleOption(index, items = FAQS) {
+    const faq = items[index];
     if (!faq) {
       appendMessage('bot', 'Opción no válida. Elige un número de la lista.', true);
       return;
     }
     state.lastUserQuery = faq.q;
     appendMessage('user', `${index + 1}. ${faq.q}`);
+    // Si es la opción "Mi duda no está en la lista", prellenar y cerrar
+    const isGeneric = /Mi duda no está en la lista/i.test(faq.q);
+    if (isGeneric) {
+      appendMessage('bot', 'Perfecto, te ayudo a abrir un caso con una plantilla.', true);
+      prefillGeneralTemplate();
+      closeChatbot();
+      return;
+    }
     appendMessage('bot', faq.a, true);
   }
 
@@ -152,8 +159,9 @@
         return;
       }
       const n = parseInt(raw, 10);
-      if (isNaN(n) || n < 1 || n > FAQS.length) {
-        appendMessage('bot', `Número inválido. Elige entre 1 y ${FAQS.length}.`, true);
+      const total = FAQS.length + 1; // incluye opción genérica
+      if (isNaN(n) || n < 1 || n > total) {
+        appendMessage('bot', `Número inválido. Elige entre 1 y ${total}.`, true);
         return;
       }
       handleOption(n - 1);
@@ -166,3 +174,32 @@
     bindEvents();
   });
 })();
+
+function prefillGeneralTemplate() {
+  const titleEl = document.getElementById('ticketTitle');
+  const descEl = document.getElementById('ticketDesc');
+  if (titleEl && descEl) {
+    titleEl.value = 'Consulta general desde Chatbot';
+    descEl.value = [
+      'Resumen: [describe en una línea el problema]',
+      '',
+      'Pasos para reproducir:',
+      '1) ',
+      '2) ',
+      '3) ',
+      '',
+      'Comportamiento esperado vs actual:',
+      '- Esperado: ',
+      '- Actual: ',
+      '',
+      'Impacto:',
+      '- Usuarios/servicios afectados: ',
+      '- Frecuencia: ',
+      '',
+      'Datos adicionales:',
+      '- Mensajes de error, capturas, versión, entorno'
+    ].join('\n');
+    titleEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    titleEl.focus();
+  }
+}
