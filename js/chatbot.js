@@ -99,6 +99,18 @@
     modal.style.display = 'block';
     const box = $('chatbotMessages');
     if (box) box.innerHTML = '';
+    // Asegurar que el input acepte texto aunque el HTML esté cacheado
+    const input = $('chatbotInput');
+    if (input) {
+      try {
+        input.type = 'text';
+      } catch (_) {}
+      input.setAttribute('inputmode', 'text');
+      input.removeAttribute('min');
+      input.removeAttribute('step');
+      input.placeholder = 'Escribe tu pregunta o el número (1-7)';
+      input.value = '';
+    }
     appendMessage('bot', 'Hola 👋 Soy tu asistente. Selecciona una opción por número:');
     renderOptions();
   }
