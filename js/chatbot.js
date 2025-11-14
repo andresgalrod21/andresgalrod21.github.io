@@ -150,7 +150,7 @@
     // Sin coincidencia: avisar y prellenar el formulario con la duda
     appendMessage(
       'bot',
-      'Por ahora no puedo colaborar directamente con esta consulta. Al crear el ticket, será remitido al área encargada. Si usas el botón "Crear caso desde el chat", remitiremos esta información para la creación del caso.',
+      'Por ahora no puedo colaborar directamente con esta consulta. Al crear el ticket, será remitido al área encargada. Si usas el botón "Crear caso desde el chat", remitiremos esta información para la creación del caso. También puedes seleccionar la opción 7 "Mi duda no está en la lista" para usar una plantilla de creación de caso.',
       true
     );
     prefillCaseFromText(query);
@@ -192,7 +192,7 @@
       const total = FAQS.length + 1; // incluye opción genérica
       if (!isNaN(n)) {
         if (n < 1 || n > total) {
-          appendMessage('bot', `Número inválido. Elige entre 1 y ${total}.`, true);
+          appendMessage('bot', `Número inválido. Elige entre 1 y ${total}, o usa la opción 7 "Mi duda no está en la lista" para abrir un caso con plantilla.`, true);
         } else {
           handleOption(n - 1);
         }
