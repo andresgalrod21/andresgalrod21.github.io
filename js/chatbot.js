@@ -150,11 +150,11 @@
     // Sin coincidencia: avisar y prellenar el formulario con la duda
     appendMessage(
       'bot',
-      'Por ahora no puedo colaborar directamente con esta consulta. Al crear el ticket, será remitido al área encargada.',
+      'Por ahora no puedo colaborar directamente con esta consulta. Al crear el ticket, será remitido al área encargada. Si usas el botón "Crear caso desde el chat", remitiremos esta información para la creación del caso.',
       true
     );
     prefillCaseFromText(query);
-    closeChatbot();
+    // Mantener el modal abierto para que el usuario pueda pulsar el botón
   }
 
   function prefillCaseFromChat() {
