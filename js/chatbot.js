@@ -39,6 +39,7 @@
   const state = {
     lastUserQuery: ''
   };
+  const BOT_SUFFIX = ' ¿Puedo colaborarte con algo más?';
 
   function normalize(s) {
     return (s || '').toLowerCase().trim();
@@ -64,15 +65,31 @@
     return bestScore >= 2 ? best : null; // umbral sencillo
   }
 
-  function appendMessage(sender, text) {
+  function appendMessage(sender, text, addSuffix = false) {
     const box = $('chatbotMessages');
     if (!box) return;
     const el = document.createElement('div');
     el.style.padding = '6px 8px';
     el.style.borderBottom = '1px solid var(--border)';
-    el.innerHTML = `<strong>${sender === 'bot' ? 'Bot' : 'Tú'}:</strong> ${text}`;
+    const content = addSuffix && sender === 'bot' ? text + BOT_SUFFIX : text;
+    el.innerHTML = `<strong>${sender === 'bot' ? 'Bot' : 'Tú'}:</strong> ${content}`;
     box.appendChild(el);
     box.scrollTop = box.scrollHeight;
+  }
+
+  function renderOptions() {
+    const opt = $('chatbotOptions');
+    if (!opt) return;
+    opt.innerHTML = '';
+    FAQS.forEach((f, i) => {
+      const b = document.createElement('button');
+      b.className = 'btn btn-secondary';
+      b.type = 'button';
+      b.dataset.index = String(i);
+      b.textContent = `${i + 1}. ${f.q}`;
+      b.addEventListener('click', () => handleOption(i));
+      opt.appendChild(b);
+    });
   }
 
   function openChatbot() {
@@ -81,9 +98,10 @@
     modal.style.display = 'block';
     const box = $('chatbotMessages');
     if (box) box.innerHTML = '';
-    appendMessage('bot', 'Hola 👋 Soy tu asistente. Puedo ayudarte con:');
-    const suggestions = FAQS.map(f => `• ${f.q}`).join('<br/>');
-    appendMessage('bot', suggestions);
+    appendMessage('bot', 'Hola 👋 Soy tu asistente. Selecciona una opción por número:', true);
+    const suggestions = FAQS.map((f, i) => `${i + 1}. ${f.q}`).join('<br/>');
+    appendMessage('bot', suggestions, true);
+    renderOptions();
   }
 
   function closeChatbot() {
@@ -91,15 +109,15 @@
     if (modal) modal.style.display = 'none';
   }
 
-  function handleUserQuery(query) {
-    state.lastUserQuery = query;
-    appendMessage('user', query);
-    const best = findBestFAQ(query);
-    if (best) {
-      appendMessage('bot', best.a);
-    } else {
-      appendMessage('bot', 'No encontré una respuesta exacta. ¿Quieres crear un caso para que el equipo lo atienda? Pulsa "Crear caso desde el chat".');
+  function handleOption(index) {
+    const faq = FAQS[index];
+    if (!faq) {
+      appendMessage('bot', 'Opción no válida. Elige un número de la lista.', true);
+      return;
     }
+    state.lastUserQuery = faq.q;
+    appendMessage('user', `${index + 1}. ${faq.q}`);
+    appendMessage('bot', faq.a, true);
   }
 
   function prefillCaseFromChat() {
@@ -128,12 +146,17 @@
     if (form) form.addEventListener('submit', (e) => {
       e.preventDefault();
       const input = $('chatbotInput');
-      const q = normalize(input?.value || '');
-      if (!q) {
-        appendMessage('bot', 'Escribe una pregunta para ayudarte mejor.');
+      const raw = (input?.value || '').trim();
+      if (!raw) {
+        appendMessage('bot', 'Ingresa el número de la opción para ayudarte mejor.', true);
         return;
       }
-      handleUserQuery(q);
+      const n = parseInt(raw, 10);
+      if (isNaN(n) || n < 1 || n > FAQS.length) {
+        appendMessage('bot', `Número inválido. Elige entre 1 y ${FAQS.length}.`, true);
+        return;
+      }
+      handleOption(n - 1);
       if (input) input.value = '';
     });
     if (createBtn) createBtn.addEventListener('click', prefillCaseFromChat);

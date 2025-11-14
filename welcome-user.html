@@ -81,9 +81,12 @@
           <div id="chatbotMessages" class="messages-scrollbox" style="max-height: 300px;">
             <!-- mensajes del chatbot -->
           </div>
+          <div id="chatbotOptions" class="actions" style="flex-wrap: wrap; gap: 6px; justify-content: flex-start; margin-top: 8px;">
+            <!-- botones numerados generados dinámicamente -->
+          </div>
           <form id="chatbotForm" style="margin-top: 12px;">
             <label for="chatbotInput">Escribe tu pregunta</label>
-            <input id="chatbotInput" type="text" placeholder="Ej.: ¿Cómo crear un ticket?" />
+            <input id="chatbotInput" type="number" min="1" step="1" placeholder="Ingresa el número de la opción (1-6)" />
             <div class="actions" style="margin-top: 8px;">
               <button id="chatbotClose" class="btn btn-secondary" type="button">Cerrar</button>
               <button id="chatbotSend" class="btn" type="submit">Enviar</button>
