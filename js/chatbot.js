@@ -127,6 +127,24 @@
     appendMessage('bot', faq.a, true);
   }
 
+  function handleFreeText(query) {
+    state.lastUserQuery = query;
+    appendMessage('user', query);
+    const best = findBestFAQ(query);
+    if (best) {
+      appendMessage('bot', best.a, true);
+      return;
+    }
+    // Sin coincidencia: avisar y prellenar el formulario con la duda
+    appendMessage(
+      'bot',
+      'Por ahora no puedo colaborar directamente con esta consulta. Al crear el ticket, será remitido al área encargada.',
+      true
+    );
+    prefillCaseFromText(query);
+    closeChatbot();
+  }
+
   function prefillCaseFromChat() {
     const titleEl = $('ticketTitle');
     const descEl = $('ticketDesc');
@@ -155,16 +173,20 @@
       const input = $('chatbotInput');
       const raw = (input?.value || '').trim();
       if (!raw) {
-        appendMessage('bot', 'Ingresa el número de la opción para ayudarte mejor.', true);
+        appendMessage('bot', 'Escribe una pregunta o el número de la opción.', true);
         return;
       }
       const n = parseInt(raw, 10);
       const total = FAQS.length + 1; // incluye opción genérica
-      if (isNaN(n) || n < 1 || n > total) {
-        appendMessage('bot', `Número inválido. Elige entre 1 y ${total}.`, true);
-        return;
+      if (!isNaN(n)) {
+        if (n < 1 || n > total) {
+          appendMessage('bot', `Número inválido. Elige entre 1 y ${total}.`, true);
+        } else {
+          handleOption(n - 1);
+        }
+      } else {
+        handleFreeText(raw);
       }
-      handleOption(n - 1);
       if (input) input.value = '';
     });
     if (createBtn) createBtn.addEventListener('click', prefillCaseFromChat);
@@ -202,4 +224,37 @@ function prefillGeneralTemplate() {
     titleEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     titleEl.focus();
   }
+
+function prefillCaseFromText(userText) {
+  const titleEl = document.getElementById('ticketTitle');
+  const descEl = document.getElementById('ticketDesc');
+  if (titleEl && descEl) {
+    const title = userText.length > 60 ? userText.slice(0, 60) + '…' : userText;
+    titleEl.value = title || 'Consulta desde Chatbot';
+    descEl.value = [
+      `Consulta del usuario: ${userText}`,
+      '',
+      'Aviso: remitido al área encargada por el chatbot.',
+      '',
+      'Detalles adicionales (completa si puedes):',
+      '- Pasos para reproducir:',
+      '- Mensajes de error / capturas:',
+      '- Impacto (usuarios/servicios afectados):'
+    ].join('\n');
+    titleEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    titleEl.focus();
+  } else {
+    // Si no hay formulario visible, informar al usuario
+    const msg = 'No pude encontrar el formulario. Abre "Crear nuevo ticket" y vuelve a intentar.';
+    const box = document.getElementById('chatbotMessages');
+    if (box) {
+      const el = document.createElement('div');
+      el.style.padding = '6px 8px';
+      el.style.borderBottom = '1px solid var(--border)';
+      el.innerHTML = `<strong>Bot:</strong> ${msg}${' ¿Puedo colaborarte con algo más?'}`;
+      box.appendChild(el);
+      box.scrollTop = box.scrollHeight;
+    }
+  }
+}
 }
